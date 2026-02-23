@@ -13,7 +13,10 @@ createRoot(document.getElementById("root")).render(
   <StrictMode>
     <Provider store={store}>
       <PersistGate loading={null} persistor={persistor}>
-        <ErrorBoundary FallbackComponent={ErrorFallback}>
+        <ErrorBoundary
+          FallbackComponent={ErrorFallback}
+          onReset={() => window.location.replace("/")}
+        >
           <App />
         </ErrorBoundary>
       </PersistGate>

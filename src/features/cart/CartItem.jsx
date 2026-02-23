@@ -14,25 +14,41 @@ function CartItem({ product }) {
 
   if (!quantity) return null;
 
+  function showToast(message, icon) {
+    toast.success(message, { icon });
+  }
+
   function handleRemoveCartItem() {
     dispatch(removeCartItem(id));
 
-    toast.success(
+    showToast(
       <span>
-        <strong>{title}</strong> removed from cart
+        {quantity} x <strong>{title}</strong> removed from cart
       </span>,
-      {
-        icon: "🗑️",
-      },
+      "🗑️",
     );
   }
 
   function handleIncQty() {
     dispatch(incItemQty(id));
+
+    showToast(
+      <span>
+        1 x <strong>{title}</strong> added to cart
+      </span>,
+      "🛒",
+    );
   }
 
   function handleDecQty() {
     dispatch(decItemQty(id));
+
+    showToast(
+      <span>
+        1 x <strong>{title}</strong> removed from cart
+      </span>,
+      "🗑️",
+    );
   }
 
   return (

@@ -94,6 +94,7 @@ function ProductDetails() {
   return (
     <div className="product-details-container">
       <button onClick={handleOpenGallery} className="image-btn">
+        {/* <Spinner /> */}
         {!imgLoaded && <Spinner />}
         <img
           className="product-details-img"
