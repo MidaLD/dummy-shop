@@ -327,8 +327,6 @@ main {
 .product-img-box {
   padding: 1.5rem;
   position: relative;
-  width: 23.65rem;
-  height: 23.85rem;
 }
 
 .product-img {
@@ -916,7 +914,17 @@ button:disabled {
   }
 
   .products-container {
-    grid-template-columns: repeat(2, 1fr);
-    padding: 3rem 5rem;
+    grid-template-columns: repeat(3, 1fr);
+    padding: 3rem 4rem;
+    /* padding-top: 4rem; */
+  }
+
+  .product-container {
+    width: 18rem;
+    height: 30rem;
+    /* transition: all 300ms; */
+    box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
+    outline: 2px solid transparent;
+    overflow: hidden;
   }
 }
