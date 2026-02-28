@@ -38,7 +38,7 @@ function AppLayout() {
         </AnimatePresence>
         <Outlet />
       </main>
-      {/* <Footer /> */}
+      <Footer />
     </div>
   );
 }

@@ -42,7 +42,6 @@ grays: #1c1917
 .app {
   display: grid;
   grid-template-rows: auto 1fr auto;
-  min-height: 100vh;
 }
 
 .login-container {
@@ -275,7 +274,7 @@ main {
 }
 
 .main {
-  height: 100%;
+  /* height: 100%; */
   position: relative;
   color: #181817;
 }
@@ -283,11 +282,11 @@ main {
 .shop-container {
   display: flex;
   flex-direction: column;
-  justify-content: space-between;
+  justify-content: start;
   align-items: center;
   transition: all 300ms;
   padding-bottom: 2rem;
-  height: 100svh;
+  /* height: 100%; */
 }
 
 .products-container {
@@ -376,8 +375,8 @@ main {
   justify-content: center;
   align-items: center;
   gap: 1rem;
-  margin-top: auto;
-  margin-bottom: 5rem;
+  margin: 2rem 0;
+  /* margin-bottom: 9rem; */
 }
 
 .pagination-btn {
@@ -934,5 +933,9 @@ button:disabled {
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     outline: 2px solid transparent;
     overflow: hidden;
+  }
+
+  .pagination-btn {
+    font-size: 2.8rem;
   }
 }
