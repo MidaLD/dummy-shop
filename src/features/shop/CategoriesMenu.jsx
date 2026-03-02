@@ -6,12 +6,18 @@ import { setSearchQuery, toggleCategoriesMenu } from "../../redux/shopSlice";
 import { useNavigate, useSearchParams } from "react-router";
 import { motion } from "motion/react"; // eslint-disable-line no-unused-vars
 import { useOutsideClick } from "../hooks/useOutsideClick";
+import { useIsLargeDesktop } from "../hooks/useIsLargeDesktop";
 
 function CategoriesMenu() {
   const { categories, isLoading } = useCategoriesList();
+  const isLargeDesktop = useIsLargeDesktop();
   const dispatch = useDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
-  const ref = useOutsideClick(() => dispatch(toggleCategoriesMenu()));
+  const outsideRef = useOutsideClick(() => {
+    if (!isLargeDesktop) dispatch(toggleCategoriesMenu());
+  });
+
+  const ref = isLargeDesktop ? null : outsideRef;
   const navigate = useNavigate();
 
   function handleAllProductsCat() {
@@ -46,13 +52,15 @@ function CategoriesMenu() {
           </>
         )}
       </motion.ul>
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        exit={{ opacity: 0 }}
-        transition={{ duration: 0.2 }}
-        className="categories-menu-overlay"
-      ></motion.div>
+      {!isLargeDesktop && (
+        <motion.div
+          initial={{ opacity: 0 }}
+          animate={{ opacity: 1 }}
+          exit={{ opacity: 0 }}
+          transition={{ duration: 0.2 }}
+          className="categories-menu-overlay"
+        ></motion.div>
+      )}
     </>
   );
 }

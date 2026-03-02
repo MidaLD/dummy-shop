@@ -101,6 +101,7 @@ grays: #1c1917
   background-color: #3f51b5;
   padding: 1rem 2rem;
   height: 7rem;
+  position: relative;
 }
 
 .menu-search-container {
@@ -111,6 +112,12 @@ grays: #1c1917
 .header-icon {
   color: #eceef8;
   font-size: 3rem;
+}
+
+.header-logo-box {
+  position: absolute;
+  left: 50%;
+  transform: translateX(-50%);
 }
 
 .header-logo {
@@ -295,7 +302,7 @@ main {
   display: grid;
   grid-template-columns: repeat(4, 1fr);
   grid-template-rows: repeat(2, 1fr);
-  padding: 6rem 10rem;
+  padding: 3rem 10rem;
   gap: 4rem 2rem;
   justify-content: center;
   align-items: center;
@@ -942,5 +949,41 @@ button:disabled {
 
   .pagination-btn {
     font-size: 2.8rem;
+  }
+
+  .search-input:focus {
+    width: 9rem;
+  }
+}
+
+@media (min-width: 1440px) {
+  .main {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+  }
+
+  .products-container {
+    padding-left: 0;
+    padding-right: 0;
+  }
+
+  .categories-menu {
+    position: static;
+    display: inline-block;
+
+    padding-top: 3rem;
+    margin-right: 3rem;
+    width: unset;
+  }
+
+  .categories-menu-overlay {
+    display: none;
+  }
+
+  .spinner-shop-box {
+    position: relative;
+    width: 102rem;
   }
 }

@@ -6,10 +6,12 @@ import Search from "../features/shop/Search";
 import UserMenu from "../features/user/UserMenu";
 import CartLink from "../features/cart/CartLink";
 import logo from "../assets/logo/dummy-shop-high-resolution-logo-transparent.png";
+import { useIsLargeDesktop } from "../features/hooks/useIsLargeDesktop";
 
 function Header() {
   const dispatch = useDispatch();
   const { showCategories } = useSelector((store) => store.shop);
+  const isLargeDesktop = useIsLargeDesktop();
 
   function handleToggleCategories() {
     dispatch(toggleCategoriesMenu());
@@ -18,13 +20,15 @@ function Header() {
   return (
     <header className="header">
       <div className="menu-search-container">
-        <button onClick={handleToggleCategories}>
-          {showCategories ? (
-            <HiOutlineXMark className="header-icon" />
-          ) : (
-            <HiOutlineBars3 className="header-icon" />
-          )}
-        </button>
+        {!isLargeDesktop && (
+          <button onClick={handleToggleCategories}>
+            {showCategories ? (
+              <HiOutlineXMark className="header-icon" />
+            ) : (
+              <HiOutlineBars3 className="header-icon" />
+            )}
+          </button>
+        )}
 
         <Search />
       </div>

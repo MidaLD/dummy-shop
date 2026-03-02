@@ -8,8 +8,11 @@ import { useUserCart } from "../features/cart/useUserCart";
 import { useCurrentUser } from "../features/authentication/useCurrentUser";
 import { useEffect } from "react";
 import { setCart, setCartId } from "../redux/cartSlice";
+import { useIsLargeDesktop } from "../features/hooks/useIsLargeDesktop";
+import { showCategoriesMenu } from "../redux/shopSlice";
 
 function AppLayout() {
+  const isLargeDesktop = useIsLargeDesktop();
   const { showCategories } = useSelector((store) => store.shop);
   const { cartId } = useSelector((store) => store.cart);
 
@@ -25,6 +28,10 @@ function AppLayout() {
       dispatch(setCartId(userCart.id));
     }
   }, [isSuccess, userCart, dispatch, cartId]);
+
+  useEffect(() => {
+    if (isLargeDesktop) dispatch(showCategoriesMenu());
+  }, [dispatch, isLargeDesktop]);
 
   if (isUserLoading || isLoading) return null;
 

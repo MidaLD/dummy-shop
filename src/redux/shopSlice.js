@@ -12,12 +12,16 @@ const shopSlice = createSlice({
     toggleCategoriesMenu(state) {
       state.showCategories = !state.showCategories;
     },
+    showCategoriesMenu(state) {
+      state.showCategories = true;
+    },
     setSearchQuery(state, action) {
       state.searchQuery = action.payload;
     },
   },
 });
 
-export const { toggleCategoriesMenu, setSearchQuery } = shopSlice.actions;
+export const { toggleCategoriesMenu, showCategoriesMenu, setSearchQuery } =
+  shopSlice.actions;
 
 export default shopSlice.reducer;

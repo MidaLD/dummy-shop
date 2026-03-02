@@ -17,8 +17,6 @@ function Shop() {
 
   const isMobile = useIsMobile();
 
-  console.log(isMobile);
-
   const limit = isMobile ? 9 : 8;
 
   const { data, isLoading } = useAllProducts({ category, page, limit });
@@ -29,8 +27,18 @@ function Shop() {
     limit,
   });
 
-  if (isLoading || isSearching) return <Spinner />;
-  // if (true) return <Spinner />;
+  if (isLoading || isSearching)
+    return (
+      <div className="spinner-shop-box">
+        <Spinner />
+      </div>
+    );
+  // if (true)
+  //   return (
+  //     <div className="spinner-shop-box">
+  //       <Spinner />
+  //     </div>
+  //   );
 
   let products = data.products;
   let numPages = Math.ceil(data.total / limit);
