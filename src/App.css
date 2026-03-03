@@ -189,7 +189,7 @@ grays: #1c1917
   background-color: white;
   color: #324191;
   font-weight: 500;
-  width: 16%;
+  width: 18rem;
   padding: 1rem 2rem;
   border-radius: 6px;
   border: 1px solid #324191;
@@ -425,7 +425,7 @@ button:disabled {
   grid-template-columns: repeat(2, 1fr);
   padding: 3rem 3rem;
   max-width: 102rem;
-  height: 100rem;
+  /* height: 100rem; */
 }
 
 .image-btn {
@@ -708,12 +708,14 @@ button:disabled {
   display: flex;
   justify-content: center;
   align-items: stretch;
-  width: 80%;
-  margin: 5rem auto;
+  width: 102rem;
+  /* margin: 5rem auto; */
+  margin-top: 3rem;
   overflow: hidden;
   border-radius: 6px;
   color: #33302e;
   box-shadow: 0 0 15px rgba(0, 0, 0, 0.2);
+  /* margin: 3rem 2rem; */
 }
 
 .cart-box {
@@ -742,7 +744,7 @@ button:disabled {
   padding: 1rem 4rem;
   display: flex;
   flex-direction: column;
-  margin-top: 2rem;
+  /* margin-top: 2rem; */
   /* justify-content: center; */
   /* align-items: center; */
 }
@@ -988,6 +990,11 @@ button:disabled {
 
   .user-img {
     display: none;
+  }
+
+  .cart-container {
+    margin: 3rem 2rem;
+    flex-direction: column;
   }
 }
 
