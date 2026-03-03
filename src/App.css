@@ -612,6 +612,7 @@ button:disabled {
   border-radius: 6px;
   width: 90%;
   height: 85svh;
+
   overflow: hidden;
 }
 
@@ -980,6 +981,14 @@ button:disabled {
   /* .add-btn {
     width: 16rem;
   } */
+
+  .modal-box {
+    height: 60svh;
+  }
+
+  .user-img {
+    display: none;
+  }
 }
 
 @media (min-width: 1440px) {
