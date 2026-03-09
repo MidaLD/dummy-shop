@@ -427,7 +427,6 @@ button:disabled {
   grid-template-columns: repeat(2, 1fr);
   padding: 3rem 3rem;
   max-width: 102rem;
-  /* height: 100rem; */
 }
 
 .image-btn {
@@ -985,18 +984,24 @@ button:disabled {
     font-size: 2.8rem;
   }
 
+  .reviews-container {
+    grid-column: auto;
+  }
+
   .reviews {
     grid-template-columns: 1fr;
   }
 
   .image-btn {
     margin-right: unset;
-    padding: 1rem;
+    /* padding: 1rem; */
+    margin: 1rem;
+    margin-bottom: 2rem;
   }
 
-  /* .add-btn {
-    width: 16rem;
-  } */
+  .product-details-container {
+    grid-template-columns: 1fr;
+  }
 
   .modal-box {
     height: 60svh;
