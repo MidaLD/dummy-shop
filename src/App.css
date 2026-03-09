@@ -986,6 +986,7 @@ button:disabled {
 
   .reviews-container {
     grid-column: auto;
+    padding: 0 2rem;
   }
 
   .reviews {
