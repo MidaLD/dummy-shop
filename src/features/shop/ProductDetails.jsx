@@ -24,7 +24,12 @@ function ProductDetails() {
     window.scrollTo(0, 0);
   }, []);
 
-  if (isLoading) return <Spinner />;
+  if (isLoading)
+    return (
+      <div className="product-details-spinner">
+        <Spinner />
+      </div>
+    );
 
   if (error)
     return (

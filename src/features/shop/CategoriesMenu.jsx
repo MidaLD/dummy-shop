@@ -40,7 +40,9 @@ function CategoriesMenu() {
         ref={ref}
       >
         {isLoading ? (
-          <Spinner />
+          <div className="categories-menu-spinner">
+            <Spinner />
+          </div>
         ) : (
           <>
             <button className="category-item-button all-products-button">
