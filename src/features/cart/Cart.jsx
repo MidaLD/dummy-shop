@@ -7,6 +7,7 @@ import {
 import { Link } from "react-router";
 import { HiArrowLongLeft } from "react-icons/hi2";
 import { clearCart } from "../../redux/cartSlice";
+import toast from "react-hot-toast";
 
 function Cart() {
   const dispatch = useDispatch();
@@ -23,6 +24,8 @@ function Cart() {
 
   function handleClearCart() {
     dispatch(clearCart());
+
+    toast.success(<span>Cart Cleared</span>);
   }
 
   return (
