@@ -15,13 +15,13 @@ function ProductGalleryModal({ images, handleCloseGallery }) {
   }
 
   function handlePrevImage() {
-    if (mainImageIndex <= 0) return;
-    setMainImageIndex((prev) => prev - 1);
+    if (mainImageIndex <= 0) setMainImageIndex(numImages - 1);
+    else setMainImageIndex((prev) => prev - 1);
   }
 
   function handleNextImage() {
-    if (mainImageIndex >= numImages - 1) return;
-    setMainImageIndex((prev) => prev + 1);
+    if (mainImageIndex >= numImages - 1) setMainImageIndex(0);
+    else setMainImageIndex((prev) => prev + 1);
   }
 
   return createPortal(
@@ -66,7 +66,7 @@ function ProductGalleryModal({ images, handleCloseGallery }) {
         </button>
       </div>
     </div>,
-    document.getElementById("root")
+    document.getElementById("root"),
   );
 }
 
