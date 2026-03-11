@@ -947,10 +947,11 @@ button:disabled {
 
   .search-box {
     gap: 0.5rem;
+    padding-right: 1rem;
   }
 
   .search-input {
-    width: 6rem;
+    max-width: 7rem;
   }
 
   .search-input:focus {
