@@ -1,13 +1,15 @@
 import CartItem from "./CartItem";
-import { useSelector } from "react-redux";
+import { useDispatch, useSelector } from "react-redux";
 import {
   selectDiscountedTotal,
   selectTotalQuantity,
 } from "../../redux/selectors/cartSelectors";
 import { Link } from "react-router";
 import { HiArrowLongLeft } from "react-icons/hi2";
+import { clearCart } from "../../redux/cartSlice";
 
 function Cart() {
+  const dispatch = useDispatch();
   const products = useSelector((store) => store.cart.products);
   const totalQuantity = useSelector(selectTotalQuantity);
   const discountedTotal = useSelector(selectDiscountedTotal);
@@ -18,6 +20,10 @@ function Cart() {
         <p>Your cart is empty.</p>
       </div>
     );
+
+  function handleClearCart() {
+    dispatch(clearCart());
+  }
 
   return (
     <div className="cart-container">
@@ -32,13 +38,15 @@ function Cart() {
             <CartItem product={product} key={product.id} />
           ))}
         </div>
-
-        <Link to="/">
-          <div className="back-link">
-            <HiArrowLongLeft className="back-icon" />
-            <span>Back to shop</span>
-          </div>
-        </Link>
+        <div className="cart-btns">
+          <Link to="/">
+            <div className="back-link">
+              <HiArrowLongLeft className="back-icon" />
+              <span>Back to shop</span>
+            </div>
+          </Link>
+          <button onClick={handleClearCart}>Clear Cart</button>
+        </div>
       </div>
       <div className="checkout-box">
         <div className="checkout-header">

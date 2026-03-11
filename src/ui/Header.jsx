@@ -19,25 +19,27 @@ function Header() {
 
   return (
     <header className="header">
-      <div className="menu-search-container">
-        {!isLargeDesktop && (
-          <button onClick={handleToggleCategories}>
-            {showCategories ? (
-              <HiOutlineXMark className="header-icon" />
-            ) : (
-              <HiOutlineBars3 className="header-icon" />
-            )}
-          </button>
-        )}
+      <div className="header-container">
+        <div className="menu-search-container">
+          {!isLargeDesktop && (
+            <button onClick={handleToggleCategories}>
+              {showCategories ? (
+                <HiOutlineXMark className="header-icon" />
+              ) : (
+                <HiOutlineBars3 className="header-icon" />
+              )}
+            </button>
+          )}
 
-        <Search />
-      </div>
-      <Link to="/" className="header-logo-box">
-        <img className="header-logo" src={logo} alt="" />
-      </Link>
-      <div className="user-cart-container">
-        <UserMenu />
-        <CartLink />
+          <Search />
+        </div>
+        <Link to="/" className="header-logo-box">
+          <img className="header-logo" src={logo} alt="" />
+        </Link>
+        <div className="user-cart-container">
+          <UserMenu />
+          <CartLink />
+        </div>
       </div>
     </header>
   );
