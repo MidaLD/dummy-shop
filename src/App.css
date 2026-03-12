@@ -1016,6 +1016,11 @@ button:disabled {
     font-size: 40%;
   }
 
+  .category-item-button {
+    font-size: 2rem;
+    padding: 0.8rem 2rem;
+  }
+
   .user-cart-container {
     gap: 0.5rem;
     /* max-width: 102rem; */
