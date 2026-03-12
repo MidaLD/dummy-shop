@@ -325,7 +325,7 @@ main {
   gap: 4rem 2rem;
   justify-content: center;
   align-items: center;
-  /* width: 100%; */
+  max-width: 100%;
 }
 
 .product-container {
@@ -337,7 +337,7 @@ main {
   background-color: white;
   position: relative;
   border-radius: 6px;
-  max-width: 24rem;
+  /* max-width: 24rem; */
   max-height: 37.85rem;
   /* asdasdasdasdasdadwadawdawdawdawdawdawdawdawdawdaw */
   /* height: 32rem; */
@@ -1042,13 +1042,14 @@ button:disabled {
     grid-template-rows: repeat(3, 1fr);
     padding: 3rem 1rem;
     padding-top: 4rem;
+    /* width: 100%; */
   }
 
   .product-container {
     /* width: 18rem; */
     max-width: 17rem;
     width: 100%;
-    height: 30rem;
+    /* height: 30rem; */
     /* transition: all 300ms; */
     box-shadow: 0 0 15px rgba(0, 0, 0, 0.1);
     outline: 2px solid transparent;
