@@ -50,11 +50,7 @@ function ProductItem({ product }) {
         to={`/product-details/${id}`}
       >
         <div className="product-img-box">
-          {!imgLoaded && (
-            <div className="img-spinner-box">
-              <Spinner />
-            </div>
-          )}
+          {!imgLoaded && <Spinner />}
 
           <motion.img
             initial={{ opacity: 0 }}
