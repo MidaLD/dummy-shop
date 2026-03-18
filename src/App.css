@@ -380,6 +380,7 @@ main {
 .product-title {
   display: -webkit-box;
   -webkit-line-clamp: 2;
+
   -webkit-box-orient: vertical;
   overflow: hidden;
   /* margin-top: 1rem; */
@@ -675,6 +676,7 @@ button:disabled {
 .modal-thumbnail {
   width: 100%;
   padding: 1rem;
+  aspect-ratio: 1/1;
 }
 
 .selected-image {
