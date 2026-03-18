@@ -36,7 +36,7 @@ function UserMenu() {
         <>
           <button className="user-menu-btn" onClick={handleUserMenu}>
             <img className="user-img" src={currentUser.image} alt="" />
-            <p>{fullName}</p>
+            <p data-first={currentUser.firstName}>{fullName}</p>
             {userMenuOpen ? (
               <HiMiniChevronUp className="header-icon" />
             ) : (

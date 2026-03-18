@@ -218,8 +218,8 @@ grays: #1c1917
   justify-content: center;
   align-items: center;
   border-radius: 999px;
-  top: -6px;
-  right: -7px;
+  top: -4px;
+  right: -4px;
   background-color: #b63540;
   width: 2rem;
   height: 2rem;
@@ -1014,6 +1014,27 @@ button:disabled {
   height: 100%;
 }
 
+@media (max-width: 320px) {
+  .search-input {
+    display: none;
+  }
+
+  .search-box {
+    background-color: #3f51b5;
+  }
+
+  .user-menu-btn p {
+    color: transparent;
+    /* position: relative; */
+  }
+
+  .user-menu-btn p::after {
+    /* position: absolute; */
+    content: attr(data-first);
+    color: #eceef8;
+  }
+}
+
 @media (max-width: 768px) {
   html {
     font-size: 40%;
@@ -1025,7 +1046,7 @@ button:disabled {
   }
 
   .user-cart-container {
-    gap: 0rem;
+    gap: 0.5rem;
     /* max-width: 102rem; */
   }
 
@@ -1035,7 +1056,7 @@ button:disabled {
 
   .search-box {
     gap: 0.5rem;
-    padding-right: 1rem;
+    /* padding-right: 1rem; */
   }
 
   .search-input {
