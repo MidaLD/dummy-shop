@@ -37,13 +37,13 @@ function AppLayout() {
 
   return (
     <div className="app">
-      {/* <Header /> */}
+      <Header />
 
       <main className="main">
         <AnimatePresence mode="wait">
           {showCategories && <CategoriesMenu key="categories-menu" />}
         </AnimatePresence>
-        <Outlet />
+        {/* <Outlet /> */}
       </main>
       <Footer />
     </div>
