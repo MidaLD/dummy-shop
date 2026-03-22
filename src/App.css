@@ -446,6 +446,7 @@ main {
   font-size: 1.7rem;
   font-weight: 400;
   /* margin-bottom: 1rem; */
+  min-width: 17rem;
   height: 4rem;
   padding: 0 1rem;
   line-height: 1.2;
