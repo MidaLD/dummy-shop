@@ -935,7 +935,7 @@ button:disabled {
   font-size: 1.8rem;
   font-weight: 800;
   white-space: nowrap;
-  padding-left: 2rem;
+  /* padding-left: 2rem; */
 }
 
 .cart-icon {
@@ -1138,15 +1138,6 @@ button:disabled {
     padding: 1rem 0;
     gap: 1rem;
   }
-
-  .cart-qty-inputs {
-    gap: 0;
-    padding: 0;
-  }
-
-  .cart-qty-inputs-box {
-    padding: 0;
-  }
 }
 
 @media (max-width: 768px) {
@@ -1162,6 +1153,15 @@ button:disabled {
   .user-cart-container {
     gap: 0.5rem;
     /* max-width: 102rem; */
+  }
+
+  .cart-qty-inputs {
+    gap: 0;
+    padding: 0;
+  }
+
+  .cart-qty-inputs-box {
+    padding: 0;
   }
 
   .cart-items-box {
