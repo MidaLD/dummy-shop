@@ -1111,10 +1111,6 @@ button:disabled {
 }
 
 @media (max-width: 320px) {
-  .search-box {
-    background-color: #3f51b5;
-  }
-
   .user-menu-btn p {
     color: transparent;
     /* position: relative; */
@@ -1143,6 +1139,10 @@ button:disabled {
 @media (max-width: 768px) {
   html {
     font-size: 40%;
+  }
+
+  .search-box {
+    background-color: #3f51b5;
   }
 
   .category-item-button {

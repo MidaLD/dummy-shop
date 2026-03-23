@@ -6,12 +6,13 @@ import { HiMagnifyingGlass, HiOutlineXMark } from "react-icons/hi2";
 import { useIsSmallMobile } from "../hooks/useIsSmallMobile";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react"; // eslint-disable-line no-unused-vars
+import { useIsMobile } from "../hooks/useIsMobile";
 
 function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page");
   const searchQuery = useSelector((store) => store.shop.searchQuery);
-  const isSmallMobile = useIsSmallMobile();
+  const isSmallMobile = useIsMobile();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const dispatch = useDispatch();
