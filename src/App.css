@@ -900,7 +900,7 @@ button:disabled {
   justify-content: center;
   align-items: center;
   /* gap: 1rem; */
-  padding: 1rem;
+  /* padding: 1rem; */
   font-size: 1.8rem;
   flex: 0 0 auto;
 }
@@ -910,7 +910,7 @@ button:disabled {
   align-items: center;
   justify-content: center;
   padding: 0.6rem;
-  gap: 0.5rem;
+  /* gap: 0.5rem; */
 }
 
 .cart-qty-inputs > * {
