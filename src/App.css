@@ -1162,6 +1162,10 @@ button:disabled {
     /* max-width: 102rem; */
   }
 
+  .cart-items-box {
+    padding: 1rem;
+  }
+
   .cart-item {
     gap: 1rem;
   }
