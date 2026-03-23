@@ -10,9 +10,6 @@ function ProductGalleryModal({ images, handleCloseGallery }) {
   const [imgLoaded, setImgLoaded] = useState(false);
   const ref = useOutsideClick(handleCloseGallery);
   const numImages = images.length;
-  const [allImgLoaded, setAllImgLoaded] = useState(
-    Array.from({ length: numImages }, () => false) || null,
-  );
 
   function handleSelectImage(index) {
     setMainImageIndex(index);

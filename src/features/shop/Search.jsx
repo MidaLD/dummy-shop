@@ -3,7 +3,7 @@ import { setSearchQuery } from "../../redux/shopSlice";
 import { useQueryClient } from "@tanstack/react-query";
 import { useLocation, useNavigate, useSearchParams } from "react-router";
 import { HiMagnifyingGlass, HiOutlineXMark } from "react-icons/hi2";
-import { useRef, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react"; // eslint-disable-line no-unused-vars
 import { useIsMobile } from "../hooks/useIsMobile";
 
@@ -38,11 +38,11 @@ function Search() {
 
   function handleOpenSearch() {
     setIsSearchOpen(true);
-
-    setTimeout(() => {
-      inputRef.current?.focus();
-    }, 0);
   }
+
+  useEffect(() => {
+    if (isSearchOpen) inputRef.current?.focus();
+  }, [isSearchOpen]);
 
   return (
     <div className="search-box">
