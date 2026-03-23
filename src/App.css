@@ -893,6 +893,11 @@ button:disabled {
   font-weight: 800;
   line-height: 1.4;
   letter-spacing: 0.4px;
+  display: -webkit-box;
+  line-clamp: 3;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
 }
 
 .cart-qty-inputs-box {
