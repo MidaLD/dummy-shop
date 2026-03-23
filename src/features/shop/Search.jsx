@@ -3,7 +3,7 @@ import { setSearchQuery } from "../../redux/shopSlice";
 import { useQueryClient } from "@tanstack/react-query";
 import { useLocation, useNavigate, useSearchParams } from "react-router";
 import { HiMagnifyingGlass, HiOutlineXMark } from "react-icons/hi2";
-import { useState } from "react";
+import { useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react"; // eslint-disable-line no-unused-vars
 import { useIsMobile } from "../hooks/useIsMobile";
 
@@ -13,6 +13,7 @@ function Search() {
   const searchQuery = useSelector((store) => store.shop.searchQuery);
   const isMobile = useIsMobile();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const inputRef = useRef(null);
 
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
@@ -37,6 +38,10 @@ function Search() {
 
   function handleOpenSearch() {
     setIsSearchOpen(true);
+
+    setTimeout(() => {
+      inputRef.current?.focus();
+    }, 0);
   }
 
   return (
@@ -59,6 +64,7 @@ function Search() {
               <div>
                 <HiMagnifyingGlass className="header-icon header-icon-search" />
                 <input
+                  ref={inputRef}
                   onFocus={handleClearSearchQuery}
                   onChange={handleOnChange}
                   className="search-input"
