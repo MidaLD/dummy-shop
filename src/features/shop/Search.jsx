@@ -3,7 +3,6 @@ import { setSearchQuery } from "../../redux/shopSlice";
 import { useQueryClient } from "@tanstack/react-query";
 import { useLocation, useNavigate, useSearchParams } from "react-router";
 import { HiMagnifyingGlass, HiOutlineXMark } from "react-icons/hi2";
-import { useIsSmallMobile } from "../hooks/useIsSmallMobile";
 import { useState } from "react";
 import { motion, AnimatePresence } from "motion/react"; // eslint-disable-line no-unused-vars
 import { useIsMobile } from "../hooks/useIsMobile";
@@ -12,7 +11,7 @@ function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page");
   const searchQuery = useSelector((store) => store.shop.searchQuery);
-  const isSmallMobile = useIsMobile();
+  const isMobile = useIsMobile();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
 
   const dispatch = useDispatch();
@@ -43,11 +42,11 @@ function Search() {
   return (
     <div className="search-box">
       <HiMagnifyingGlass
-        onClick={isSmallMobile ? handleOpenSearch : null}
+        onClick={isMobile ? handleOpenSearch : null}
         className="header-icon header-icon-search"
       />
 
-      {isSmallMobile ? (
+      {isMobile ? (
         <AnimatePresence mode="wait">
           {isSearchOpen && (
             <motion.div

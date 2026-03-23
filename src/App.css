@@ -1145,6 +1145,10 @@ button:disabled {
     background-color: #3f51b5;
   }
 
+  .search-input::placeholder {
+    color: #3f51b5;
+  }
+
   .category-item-button {
     font-size: 2rem;
     padding: 0.8rem 2rem;
