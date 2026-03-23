@@ -883,8 +883,8 @@ button:disabled {
 }
 
 .cart-img-box img {
-  height: 8rem;
-  /* height: 100%; */
+  min-width: 5rem;
+  height: 100%;
   aspect-ratio: 1/1;
 }
 
