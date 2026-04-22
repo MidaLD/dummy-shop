@@ -954,11 +954,17 @@ main {
   font-weight: 800;
 }
 
+.cart-price-box {
+  /* display: flex;
+  align-items: center;
+  justify-content: center; */
+}
+
 .cart-item-price {
   font-size: 1.8rem;
   font-weight: 800;
   white-space: nowrap;
-  /* padding-left: 2rem; */
+  padding-left: 2rem;
 }
 
 .cart-icon {

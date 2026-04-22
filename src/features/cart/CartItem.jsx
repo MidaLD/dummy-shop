@@ -82,7 +82,9 @@ function CartItem({ product }) {
         </div>
       </div>
 
-      <p className="cart-item-price">$ {discountedTotal}</p>
+      <div className="cart-price-box">
+        <p className="cart-item-price">$ {discountedTotal}</p>
+      </div>
 
       <div>
         <button className="cart-remove-btn" onClick={handleRemoveCartItem}>
