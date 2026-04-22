@@ -530,7 +530,7 @@ main {
 .image-btn {
   position: relative;
   padding: 2rem;
-  margin-right: 3rem;
+
   background-color: white;
   border-radius: 6px;
   /* height: 53rem; */
@@ -549,7 +549,7 @@ main {
   display: flex;
   flex-direction: column;
   gap: 2rem;
-  padding: 0rem 2rem;
+  padding: 0rem 3rem;
 }
 
 .product-details-brand {
@@ -791,15 +791,27 @@ main {
 .profile-container {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 2rem;
   padding: 3rem;
   max-width: 102rem;
   width: 100%;
+  font-weight: 500;
+}
+
+.profile-container h2 {
+  font-size: 3rem;
+  color: #33302e;
 }
 
 .profile-row {
   display: flex;
   gap: 1rem;
+  font-size: 2rem;
+  color: #324191;
+}
+
+.profile-label {
+  color: #33302e;
 }
 
 .empty-message {
