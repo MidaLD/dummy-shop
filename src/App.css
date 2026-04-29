@@ -472,21 +472,48 @@ main {
   color: #b63540;
 }
 
-.product-button {
+.button--sm {
   flex: 0 0 4rem;
   background-color: #3f51b5;
   color: #ebebeb;
   height: 4rem;
   width: 100%;
   font-size: 1.5rem;
-  border-bottom-left-radius: 6px;
-  border-bottom-right-radius: 6px;
+  border-radius: 6px;
+}
+
+.no-border-radius {
+  border-radius: 0;
+}
+
+.button--lg {
+  background-color: #3f51b5;
+  max-width: 20rem;
+  font-size: 2.5rem;
+  color: #ebebeb;
+  font-weight: 600;
+  border-radius: 6px;
+  padding: 0 1rem;
+}
+
+.button--lg:hover {
+  background-color: #4a58a9;
+  color: white;
 }
 
 .no-results {
   font-size: 3rem;
   grid-column: 1/-1;
   color: #595658;
+}
+
+.error-message {
+  font-size: 2.5rem;
+  color: #b63540;
+  text-align: center;
+  margin: 4rem 0;
+  font-weight: 600;
+  grid-column: 1/-1;
 }
 
 .pagination-container {
@@ -623,21 +650,6 @@ main {
   text-align: center;
   font-size: 2.5rem;
   color: #33302e;
-}
-
-.add-btn {
-  background-color: #3f51b5;
-  max-width: 20rem;
-  font-size: 2.5rem;
-  color: #ebebeb;
-  font-weight: 600;
-  border-radius: 6px;
-  padding: 0 1rem;
-}
-
-.add-btn:hover {
-  background-color: #4a58a9;
-  color: white;
 }
 
 .reviews-container {
@@ -1015,9 +1027,6 @@ main {
   /* align-items: flex-end; */
   padding: 4rem 0;
   /* height: 14rem; */
-}
-
-.checkout-header h3 {
   font-size: 3rem;
 }
 
@@ -1063,12 +1072,9 @@ main {
   color: #33302e;
 }
 
-.checkout-btn {
-  background-color: #33302e;
-  border: 1px solid #33302e;
+.checkout-btn-wrapper {
   border-radius: 6px;
   color: white;
-  padding: 1rem 2rem;
   width: 80%;
   font-size: 1.5rem;
   margin-top: 6rem;

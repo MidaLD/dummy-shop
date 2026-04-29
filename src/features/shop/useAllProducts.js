@@ -4,7 +4,7 @@ import { getAllProducts } from "../../services/apiDummyShop";
 export function useAllProducts({ category, page, limit }) {
   const queryClient = useQueryClient();
 
-  const { data, isLoading } = useQuery({
+  const { data, isLoading, isError, error } = useQuery({
     queryKey: ["products", category, page, limit],
     queryFn: () => getAllProducts({ category, page, limit }),
   });
@@ -23,5 +23,5 @@ export function useAllProducts({ category, page, limit }) {
       queryFn: () => getAllProducts({ category, page: page + 1, limit }),
     });
 
-  return { data, isLoading };
+  return { data, isLoading, error, isError };
 }

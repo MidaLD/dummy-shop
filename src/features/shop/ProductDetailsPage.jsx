@@ -9,8 +9,9 @@ import RatingStars from "../../ui/RatingStars";
 import ProductGalleryModal from "./ProductGalleryModal";
 import Review from "./Review";
 import toast from "react-hot-toast";
+import Button from "../../ui/Button";
 
-function ProductDetails() {
+function ProductDetailsPage() {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [quantity, setQuantity] = useState(1);
   const [galleryOpen, setGalleryOpen] = useState(false);
@@ -140,9 +141,9 @@ function ProductDetails() {
                 &#43;
               </button>
             </div>
-            <button onClick={handleAddToCart} className="add-btn">
+            <Button onClick={handleAddToCart} className="button--lg">
               Add to cart
-            </button>
+            </Button>
           </div>
         </div>
       </div>
@@ -167,4 +168,4 @@ function ProductDetails() {
   );
 }
 
-export default ProductDetails;
+export default ProductDetailsPage;

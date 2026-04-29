@@ -8,6 +8,7 @@ import { getDiscountedPrice } from "../../utils/helpers";
 import { useState } from "react";
 import Spinner from "../../ui/Spinner";
 import toast from "react-hot-toast";
+import Button from "../../ui/Button";
 
 function ProductItem({ product }) {
   const [imgLoaded, setImgLoaded] = useState(false);
@@ -67,14 +68,9 @@ function ProductItem({ product }) {
         <p className="product-price ">${discountedPrice}</p>
       </Link>
 
-      <motion.button
-        whileHover={{ backgroundColor: "#4a58a9", color: "#ffffff" }}
-        onClick={handleAddToCart}
-        transition={{ duration: 0.1 }}
-        className="product-button"
-      >
+      <Button onClick={handleAddToCart} className="button--sm no-border-radius">
         Add to cart
-      </motion.button>
+      </Button>
     </motion.div>
   );
 }

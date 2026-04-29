@@ -3,10 +3,10 @@ import "./App.css";
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AppLayout from "./ui/AppLayout";
 import Shop from "./features/shop/Shop";
-import Cart from "./features/cart/Cart";
+import CartPage from "./features/cart/CartPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import ProductDetails from "./features/shop/ProductDetails";
+import ProductDetailsPage from "./features/shop/ProductDetailsPage";
 import LoginForm from "./features/authentication/LoginForm";
 import UserProfile from "./features/user/UserProfile";
 import { Toaster } from "react-hot-toast";
@@ -36,9 +36,9 @@ function App() {
             <Route path="/" element={<Shop />} />
             <Route
               path="/product-details/:productId"
-              element={<ProductDetails />}
+              element={<ProductDetailsPage />}
             />
-            <Route path="/cart" element={<Cart />} />
+            <Route path="/cart" element={<CartPage />} />
 
             <Route
               path="/user"
