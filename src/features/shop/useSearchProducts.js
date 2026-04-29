@@ -3,9 +3,9 @@ import { searchProducts } from "../../services/apiDummyShop";
 
 export function useSearchProducts({ query, page, limit }) {
   const { data: searchedProducts, isLoading: isSearching } = useQuery({
-    queryFn: ({ signal }) => searchProducts({ query, page, limit, signal }), // ✅ dodaj limit
+    queryFn: ({ signal }) => searchProducts({ query, page, limit, signal }),
 
-    queryKey: ["search", query, page, limit], // ✅ dodaj limit u key
+    queryKey: ["search", query, page, limit],
 
     enabled: !!query,
   });
