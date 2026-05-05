@@ -10,12 +10,15 @@ import ProductGalleryModal from "./ProductGalleryModal";
 import Review from "./Review";
 import toast from "react-hot-toast";
 import Button from "../../ui/Button";
+import { type Product } from "../../services/apiDummyShop";
 
 function ProductDetailsPage() {
   const [imgLoaded, setImgLoaded] = useState(false);
-  const [quantity, setQuantity] = useState(1);
+  const [quantity, setQuantity] = useState<number | "">(1);
   const [galleryOpen, setGalleryOpen] = useState(false);
   const dispatch = useDispatch();
+
+  console.log(quantity);
 
   const { productId } = useParams();
   const id = Number(productId);
@@ -32,10 +35,10 @@ function ProductDetailsPage() {
       </div>
     );
 
-  if (error)
+  if (error || !product)
     return (
       <div className="empty-message">
-        <p>{error.message}</p>
+        <p>{error ? error.message : "No product found"}</p>
       </div>
     );
 
@@ -63,21 +66,22 @@ function ProductDetailsPage() {
   }
 
   function handleIncrement() {
-    if (quantity >= stock) return;
-    setQuantity((prev) => prev + 1);
+    if (+quantity >= stock) return;
+    setQuantity((prev) => +prev + 1);
   }
 
   function handleDecrement() {
-    if (quantity <= 1) return;
-    setQuantity((prev) => prev - 1);
+    if (+quantity <= 1) return;
+    setQuantity((prev) => +prev - 1);
   }
 
-  function handleChange(e) {
+  function handleChange(e: React.ChangeEvent<HTMLInputElement>) {
     const value = e.target.value;
     if (value === "") {
       setQuantity("");
       return;
     }
+
     const num = Number(value);
     if (!isNaN(num) && num >= 1) {
       setQuantity(num > stock ? stock : num);
@@ -85,11 +89,13 @@ function ProductDetailsPage() {
   }
 
   function handleAddToCart() {
+    if (!product || !quantity) return;
+
     const productObj = {
       id: product.id,
       title: product.title,
       price: product.price,
-      quantity: quantity,
+      quantity: +quantity,
       discountPercentage: product.discountPercentage,
       thumbnail: product.thumbnail,
     };
