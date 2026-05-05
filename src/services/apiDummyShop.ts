@@ -20,7 +20,7 @@ export type GetAllProductsParams = {
   limit: number;
 };
 
-type Product = {
+export type Product = {
   id: number;
   title: string;
   description: string;

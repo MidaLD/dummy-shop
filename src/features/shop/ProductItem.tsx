@@ -9,8 +9,14 @@ import { useState } from "react";
 import Spinner from "../../ui/Spinner";
 import toast from "react-hot-toast";
 import Button from "../../ui/Button";
+import { type Product } from "../../services/apiDummyShop";
 
-function ProductItem({ product }) {
+type ProductItemProps = {
+  product: Product;
+};
+
+function ProductItem({ product }: ProductItemProps) {
+  console.log(product);
   const [imgLoaded, setImgLoaded] = useState(false);
   const dispatch = useDispatch();
   const queryClient = useQueryClient();

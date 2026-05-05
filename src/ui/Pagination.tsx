@@ -9,30 +9,37 @@ import { useSearchParams } from "react-router";
 import PaginationBtn from "./PaginationBtn";
 import { useIsMobile } from "../features/hooks/useIsMobile";
 
-function Pagination({ numPages }) {
-  const [searchParams, setSearchParams] = useSearchParams({ page: 1 });
+type PaginationProps = {
+  numPages: number;
+};
+
+function Pagination({ numPages }: PaginationProps) {
+  const [searchParams, setSearchParams] = useSearchParams({ page: "1" });
   const currentPage = Number(searchParams.get("page")) || 1;
   const isMobile = useIsMobile();
 
-  function handlePageChange(newPage) {
-    searchParams.set("page", newPage);
-    setSearchParams(searchParams);
+  function handlePageChange(newPage: string) {
+    setSearchParams((prev) => {
+      const params = new URLSearchParams(prev);
+      params.set("page", newPage);
+      return params;
+    });
   }
 
   function handlePrevPage() {
-    if (currentPage > 1) handlePageChange(currentPage - 1);
+    if (currentPage > 1) handlePageChange((currentPage - 1).toString());
   }
 
   function handleNextPage() {
-    if (currentPage < numPages) handlePageChange(currentPage + 1);
+    if (currentPage < numPages) handlePageChange((currentPage + 1).toString());
   }
 
   function handleFirstPage() {
-    if (currentPage > 1) handlePageChange(1);
+    if (currentPage > 1) handlePageChange("1");
   }
 
   function handleLastPage() {
-    if (currentPage < numPages) handlePageChange(numPages);
+    if (currentPage < numPages) handlePageChange(numPages.toString());
   }
 
   const pageNumbers = [];
@@ -64,7 +71,7 @@ function Pagination({ numPages }) {
       {pageNumbers.map((page) => (
         <PaginationBtn
           key={page}
-          onClick={() => handlePageChange(page)}
+          onClick={() => handlePageChange(String(page))}
           active={page === currentPage}
         >
           {page}

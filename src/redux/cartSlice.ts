@@ -6,6 +6,8 @@ export type CartState = {
   cartId: number | null;
 };
 
+export type CartProductPayload = Omit<CartProduct, "total" | "discountedTotal">;
+
 const initialState: CartState = {
   products: [],
   cartId: null,
@@ -21,7 +23,7 @@ const cartSlice = createSlice({
     setCartId(state, action: PayloadAction<number | null>) {
       state.cartId = action.payload;
     },
-    addToCart(state, action: PayloadAction<CartProduct>) {
+    addToCart(state, action: PayloadAction<CartProductPayload>) {
       const existingItem = state.products.find(
         (p) => p.id === action.payload.id,
       );

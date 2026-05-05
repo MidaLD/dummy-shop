@@ -6,13 +6,14 @@ import { useSearchProducts } from "./useSearchProducts";
 import { useSearchParams } from "react-router";
 import Pagination from "../../ui/Pagination";
 import { useIsMobile } from "../hooks/useIsMobile";
+import { RootState } from "../../redux/store";
 
 function Shop() {
   const [searchParams] = useSearchParams();
 
   const category = searchParams.get("category");
   const page = Number(searchParams.get("page")) || 1;
-  const query = useSelector((store) => store.shop.searchQuery);
+  const query = useSelector((store: RootState) => store.shop.searchQuery);
 
   const isMobile = useIsMobile();
   const limit = isMobile ? 9 : 8;
@@ -22,12 +23,11 @@ function Shop() {
     page,
     limit,
   });
-  const { searchedProducts, isLoadingSearch, isErrorSearch, errorSearch } =
-    useSearchProducts({
-      query,
-      page,
-      limit,
-    });
+  const { searchedProducts, isLoadingSearch } = useSearchProducts({
+    query,
+    page,
+    limit,
+  });
 
   if (isLoading || isLoadingSearch) {
     return (
@@ -37,11 +37,9 @@ function Shop() {
     );
   }
 
-  if (isError || isErrorSearch) {
+  if (isError) {
     const errorMessage =
-      error?.message ||
-      errorSearch?.message ||
-      "An error occurred while loading products.";
+      error?.message || "An error occurred while loading products.";
     return <p className="error-message">{errorMessage}</p>;
   }
 
@@ -55,7 +53,7 @@ function Shop() {
       <div className="products-container">
         {products.length > 0 ? (
           products.map((product) => (
-            <ProductItem product={product} id={product.id} key={product.id} />
+            <ProductItem product={product} key={product.id} />
           ))
         ) : (
           <p className="no-results">No products match your search.</p>

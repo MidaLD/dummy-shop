@@ -26,7 +26,7 @@ function UserMenu() {
     logout();
   }
 
-  const ref = useOutsideClick(() => setUserMenuOpen(false));
+  const ref = useOutsideClick<HTMLDivElement>(() => setUserMenuOpen(false));
 
   if (isLoading) return null;
 
