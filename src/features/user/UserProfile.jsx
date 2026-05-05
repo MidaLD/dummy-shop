@@ -5,8 +5,6 @@ function UserProfile() {
   const { currentUser, isLoading } = useCurrentUser();
   const fullName = `${currentUser?.firstName} ${currentUser?.lastName}`;
 
-  console.log(currentUser);
-
   if (isLoading) return null;
 
   const { email, birthDate, gender } = currentUser;

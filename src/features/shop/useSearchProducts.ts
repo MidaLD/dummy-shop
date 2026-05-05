@@ -1,7 +1,14 @@
 import { useQuery } from "@tanstack/react-query";
-import { searchProducts } from "../../services/apiDummyShop";
+import {
+  searchProducts,
+  SearchProductsParams,
+} from "../../services/apiDummyShop";
 
-export function useSearchProducts({ query, page, limit }) {
+export function useSearchProducts({
+  query,
+  page,
+  limit,
+}: SearchProductsParams) {
   const {
     data: searchedProducts,
     isLoading: isLoadingSearch,

@@ -14,7 +14,7 @@ export async function getCategoriesList(): Promise<Category[]> {
   return data;
 }
 
-type GetAllProductsParams = {
+export type GetAllProductsParams = {
   category: string | null;
   page: number;
   limit: number;
@@ -97,7 +97,7 @@ export async function getAllProducts({
   return data;
 }
 
-type SearchProductsParams = {
+export type SearchProductsParams = {
   signal?: AbortSignal;
   query: string;
   page: number;

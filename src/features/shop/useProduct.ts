@@ -1,7 +1,7 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
 import { getProduct } from "../../services/apiDummyShop";
 
-export function useProduct(id) {
+export function useProduct(id: number) {
   const queryClient = useQueryClient();
 
   const {

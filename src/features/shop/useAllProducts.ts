@@ -1,7 +1,14 @@
 import { useQuery, useQueryClient } from "@tanstack/react-query";
-import { getAllProducts } from "../../services/apiDummyShop";
+import {
+  getAllProducts,
+  GetAllProductsParams,
+} from "../../services/apiDummyShop";
 
-export function useAllProducts({ category, page, limit }) {
+export function useAllProducts({
+  category,
+  page,
+  limit,
+}: GetAllProductsParams) {
   const queryClient = useQueryClient();
 
   const { data, isLoading, isError, error } = useQuery({
@@ -9,7 +16,7 @@ export function useAllProducts({ category, page, limit }) {
     queryFn: () => getAllProducts({ category, page, limit }),
   });
 
-  const pageCount = Math.ceil(data?.total / limit);
+  const pageCount = Math.ceil((data?.total ?? 0) / limit);
 
   if (page > 1)
     queryClient.prefetchQuery({

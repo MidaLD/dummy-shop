@@ -11,9 +11,9 @@ export const selectDiscountedTotal = createSelector(
     }, 0);
 
     return Number(total.toFixed(2));
-  }
+  },
 );
 
 export const selectTotalQuantity = createSelector([selectProducts], (cart) =>
-  cart.reduce((sum, product) => sum + product.quantity, 0)
+  cart.reduce((sum, product) => sum + product.quantity, 0),
 );
