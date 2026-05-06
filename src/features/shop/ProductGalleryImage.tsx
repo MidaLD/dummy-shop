@@ -1,7 +1,19 @@
 import { useState } from "react";
 import Spinner from "../../ui/Spinner";
 
-function ProductGalleryImage({ onClick, className, key, src }) {
+type ProductGalleryImageProps = {
+  onClick: () => void;
+  className: string;
+  key: number;
+  src: string;
+};
+
+function ProductGalleryImage({
+  onClick,
+  className,
+  key,
+  src,
+}: ProductGalleryImageProps) {
   const [imgLoaded, setImgLoaded] = useState(false);
 
   return (

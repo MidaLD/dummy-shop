@@ -7,13 +7,14 @@ import { useSearchParams } from "react-router";
 import Pagination from "../../ui/Pagination";
 import { useIsMobile } from "../hooks/useIsMobile";
 import { RootState } from "../../redux/store";
+import { useAppSelector } from "../hooks/useAppSelector";
 
 function Shop() {
   const [searchParams] = useSearchParams();
 
   const category = searchParams.get("category");
   const page = Number(searchParams.get("page")) || 1;
-  const query = useSelector((store: RootState) => store.shop.searchQuery);
+  const query = useAppSelector((store) => store.shop.searchQuery);
 
   const isMobile = useIsMobile();
   const limit = isMobile ? 9 : 8;

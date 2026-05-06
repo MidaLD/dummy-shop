@@ -2,7 +2,6 @@ import { useParams } from "react-router";
 import { useProduct } from "./useProduct";
 import { useEffect, useState } from "react";
 import Spinner from "../../ui/Spinner";
-import { useDispatch } from "react-redux";
 import { addToCart } from "../../redux/cartSlice";
 import { getDiscountedPrice } from "../../utils/helpers";
 import RatingStars from "../../ui/RatingStars";
@@ -10,15 +9,13 @@ import ProductGalleryModal from "./ProductGalleryModal";
 import Review from "./Review";
 import toast from "react-hot-toast";
 import Button from "../../ui/Button";
-import { type Product } from "../../services/apiDummyShop";
+import { useAppDispatch } from "../hooks/useAppDispatch";
 
 function ProductDetailsPage() {
   const [imgLoaded, setImgLoaded] = useState(false);
   const [quantity, setQuantity] = useState<number | "">(1);
   const [galleryOpen, setGalleryOpen] = useState(false);
-  const dispatch = useDispatch();
-
-  console.log(quantity);
+  const dispatch = useAppDispatch();
 
   const { productId } = useParams();
   const id = Number(productId);

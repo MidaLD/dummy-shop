@@ -1,6 +1,18 @@
 import RatingStars from "../../ui/RatingStars";
 
-function Review({ review }) {
+type Review = {
+  comment: string;
+  date: string;
+  rating: number;
+  reviewerEmail: string;
+  reviewerName: string;
+};
+
+type ReviewParams = {
+  review: Review;
+};
+
+function Review({ review }: ReviewParams) {
   const { rating, comment, date, reviewerName } = review;
 
   const formattedDate = new Date(date);

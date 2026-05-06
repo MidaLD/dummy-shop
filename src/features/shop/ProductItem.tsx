@@ -1,5 +1,4 @@
 import { motion } from "motion/react"; // eslint-disable-line no-unused-vars
-import { useDispatch } from "react-redux";
 import { Link } from "react-router";
 import { addToCart } from "../../redux/cartSlice";
 import { useQueryClient } from "@tanstack/react-query";
@@ -10,6 +9,7 @@ import Spinner from "../../ui/Spinner";
 import toast from "react-hot-toast";
 import Button from "../../ui/Button";
 import { type Product } from "../../services/apiDummyShop";
+import { useAppDispatch } from "../hooks/useAppDispatch";
 
 type ProductItemProps = {
   product: Product;
@@ -17,7 +17,7 @@ type ProductItemProps = {
 
 function ProductItem({ product }: ProductItemProps) {
   const [imgLoaded, setImgLoaded] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
   const { title, price, id, thumbnail, discountPercentage } = product;
 

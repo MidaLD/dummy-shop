@@ -1,6 +1,11 @@
 import { FaStar, FaStarHalfAlt, FaRegStar } from "react-icons/fa";
 
-function RatingStars({ rating, ratingNum = true }) {
+type RatingStartProps = {
+  rating: number;
+  ratingNum?: boolean;
+};
+
+function RatingStars({ rating, ratingNum = true }: RatingStartProps) {
   const stars = [];
 
   for (let i = 1; i <= 5; i++) {

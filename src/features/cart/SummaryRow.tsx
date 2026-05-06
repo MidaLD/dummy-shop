@@ -1,4 +1,9 @@
-function SummaryRow({ label, value }) {
+type SummaryRowProps = {
+  label: string;
+  value: string;
+};
+
+function SummaryRow({ label, value }: SummaryRowProps) {
   return (
     <div className="checkout-details">
       <div className="items-price">

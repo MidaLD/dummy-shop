@@ -1,10 +1,10 @@
 import { HiOutlineShoppingCart } from "react-icons/hi2";
 import { Link } from "react-router";
 import { selectTotalQuantity } from "../../redux/selectors/cartSelectors";
-import { useSelector } from "react-redux";
+import { useAppSelector } from "../hooks/useAppSelector";
 
 function CartLink() {
-  const totalQuantity = useSelector(selectTotalQuantity);
+  const totalQuantity = useAppSelector(selectTotalQuantity);
 
   return (
     <Link to="/cart" className="cart-link">

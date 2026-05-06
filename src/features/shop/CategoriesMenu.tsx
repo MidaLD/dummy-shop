@@ -1,12 +1,12 @@
 import Spinner from "../../ui/Spinner";
 import CategoryItem from "./CategoryItem";
 import { useCategoriesList } from "./useCategoriesList";
-import { useDispatch } from "react-redux";
 import { setSearchQuery, toggleCategoriesMenu } from "../../redux/shopSlice";
 import { useNavigate, useSearchParams } from "react-router";
 import { motion } from "motion/react";
 import { useOutsideClick } from "../hooks/useOutsideClick";
 import { useIsLargeDesktop } from "../hooks/useIsLargeDesktop";
+import { useAppDispatch } from "../hooks/useAppDispatch";
 
 type CategoriesMenuProps = {
   showCategoriesFinal: boolean;
@@ -15,7 +15,7 @@ type CategoriesMenuProps = {
 function CategoriesMenu({ showCategoriesFinal }: CategoriesMenuProps) {
   const { categories, isLoading } = useCategoriesList();
   const isLargeDesktop = useIsLargeDesktop();
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const outsideRef = useOutsideClick<HTMLUListElement>(() => {
     if (!isLargeDesktop) dispatch(toggleCategoriesMenu());

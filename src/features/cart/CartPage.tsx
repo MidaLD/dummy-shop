@@ -1,15 +1,14 @@
-import { useSelector } from "react-redux";
 import {
   selectDiscountedTotal,
   selectTotalQuantity,
 } from "../../redux/selectors/cartSelectors";
-import Button from "../../ui/Button";
 import CartItems from "./CartItems";
 import CheckoutSummary from "./CheckoutSummary";
+import { useAppSelector } from "../hooks/useAppSelector";
 
 function CartPage() {
-  const totalQuantity = useSelector(selectTotalQuantity);
-  const discountedTotal = useSelector(selectDiscountedTotal);
+  const totalQuantity = useAppSelector(selectTotalQuantity);
+  const discountedTotal = useAppSelector(selectDiscountedTotal);
 
   if (totalQuantity <= 0)
     return (

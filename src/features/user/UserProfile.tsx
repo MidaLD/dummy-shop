@@ -5,7 +5,7 @@ function UserProfile() {
   const { currentUser, isLoading } = useCurrentUser();
   const fullName = `${currentUser?.firstName} ${currentUser?.lastName}`;
 
-  if (isLoading) return null;
+  if (isLoading || !currentUser) return null;
 
   const { email, birthDate, gender } = currentUser;
   const formattedBirthDate = dayjs(birthDate).format("DD.MM.YYYY");

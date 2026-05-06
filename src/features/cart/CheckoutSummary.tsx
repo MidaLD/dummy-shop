@@ -5,9 +5,9 @@ import { clearCart } from "../../redux/cartSlice";
 import { useNavigate } from "react-router";
 import Button from "../../ui/Button";
 import { selectTotalQuantity } from "../../redux/selectors/cartSelectors";
-import SummaryRow from "../shop/SummaryRow";
+import SummaryRow from "./SummaryRow";
 
-function formatPrice(num) {
+function formatPrice(num: number) {
   return `$ ${num.toFixed(2)}`;
 }
 
@@ -16,7 +16,11 @@ const SHIPPING_OPTIONS = [
   { label: "Express Delivery", price: 15 },
 ];
 
-function CheckoutSummary({ discountedTotal }) {
+type CheckoutSummaryProps = {
+  discountedTotal: number;
+};
+
+function CheckoutSummary({ discountedTotal }: CheckoutSummaryProps) {
   const [shippingPrice, setShippingPrice] = useState(5);
   const [promoCode, setPromoCode] = useState("");
   const totalQuantity = useSelector(selectTotalQuantity);

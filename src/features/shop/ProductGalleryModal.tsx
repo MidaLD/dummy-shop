@@ -5,13 +5,21 @@ import { useOutsideClick } from "../hooks/useOutsideClick";
 import Spinner from "../../ui/Spinner";
 import ProductGalleryImage from "./ProductGalleryImage";
 
-function ProductGalleryModal({ images, handleCloseGallery }) {
+type ProductGalleryModalProps = {
+  images: string[];
+  handleCloseGallery: () => void;
+};
+
+function ProductGalleryModal({
+  images,
+  handleCloseGallery,
+}: ProductGalleryModalProps) {
   const [mainImageIndex, setMainImageIndex] = useState(0);
   const [imgLoaded, setImgLoaded] = useState(false);
-  const ref = useOutsideClick(handleCloseGallery);
+  const ref = useOutsideClick<HTMLDivElement>(handleCloseGallery);
   const numImages = images.length;
 
-  function handleSelectImage(index) {
+  function handleSelectImage(index: number) {
     setMainImageIndex(index);
   }
 
@@ -67,7 +75,7 @@ function ProductGalleryModal({ images, handleCloseGallery }) {
         </button>
       </div>
     </div>,
-    document.getElementById("root"),
+    document.getElementById("root") ?? document.body,
   );
 }
 

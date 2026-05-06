@@ -1,7 +1,6 @@
 import { Outlet } from "react-router";
 import Footer from "./Footer";
 import Header from "./Header";
-import { useDispatch, useSelector } from "react-redux";
 import CategoriesMenu from "../features/shop/CategoriesMenu";
 import { AnimatePresence } from "motion/react";
 import { useUserCart } from "../features/cart/useUserCart";
@@ -10,14 +9,16 @@ import { useEffect } from "react";
 import { setCart, setCartId } from "../redux/cartSlice";
 import { useIsLargeDesktop } from "../features/hooks/useIsLargeDesktop";
 import { RootState } from "../redux/store";
+import { useAppSelector } from "../features/hooks/useAppSelector";
+import { useAppDispatch } from "../features/hooks/useAppDispatch";
 
 function AppLayout() {
   const isLargeDesktop = useIsLargeDesktop();
 
-  const { showCategories } = useSelector((store: RootState) => store.shop);
-  const { cartId } = useSelector((store: RootState) => store.cart);
+  const { showCategories } = useAppSelector((store) => store.shop);
+  const { cartId } = useAppSelector((store) => store.cart);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
 
   const { currentUser, isLoading: isUserLoading } = useCurrentUser();
 

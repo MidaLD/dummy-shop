@@ -1,6 +1,5 @@
 import { HiOutlineBars3, HiOutlineXMark } from "react-icons/hi2";
 import { Link } from "react-router";
-import { useDispatch, useSelector } from "react-redux";
 import { hideCategoriesMenu, toggleCategoriesMenu } from "../redux/shopSlice";
 import Search from "../features/shop/Search";
 import UserMenu from "../features/user/UserMenu";
@@ -8,11 +7,12 @@ import CartLink from "../features/cart/CartLink";
 import logo from "../assets/logo/dummy-shop-high-resolution-logo-transparent.png";
 import { useIsLargeDesktop } from "../features/hooks/useIsLargeDesktop";
 import { useEffect } from "react";
-import { RootState } from "../redux/store";
+import { useAppSelector } from "../features/hooks/useAppSelector";
+import { useAppDispatch } from "../features/hooks/useAppDispatch";
 
 function Header() {
-  const dispatch = useDispatch();
-  const { showCategories } = useSelector((store: RootState) => store.shop);
+  const dispatch = useAppDispatch();
+  const { showCategories } = useAppSelector((store) => store.shop);
   const isLargeDesktop = useIsLargeDesktop();
 
   function handleToggleCategories() {

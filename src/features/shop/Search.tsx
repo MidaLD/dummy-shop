@@ -1,4 +1,3 @@
-import { useDispatch, useSelector } from "react-redux";
 import { setSearchQuery } from "../../redux/shopSlice";
 import { useQueryClient } from "@tanstack/react-query";
 import { useLocation, useNavigate, useSearchParams } from "react-router";
@@ -6,17 +5,18 @@ import { HiMagnifyingGlass, HiOutlineXMark } from "react-icons/hi2";
 import { ChangeEvent, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react"; // eslint-disable-line no-unused-vars
 import { useIsMobile } from "../hooks/useIsMobile";
-import { RootState } from "../../redux/store";
+import { useAppSelector } from "../hooks/useAppSelector";
+import { useAppDispatch } from "../hooks/useAppDispatch";
 
 function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page");
-  const searchQuery = useSelector((store: RootState) => store.shop.searchQuery);
+  const searchQuery = useAppSelector((store) => store.shop.searchQuery);
   const isMobile = useIsMobile();
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
 
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
   const location = useLocation();
   const navigate = useNavigate();

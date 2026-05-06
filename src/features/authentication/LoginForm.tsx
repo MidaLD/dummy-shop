@@ -8,7 +8,7 @@ function LoginForm() {
 
   const { login, isLoggingIn, error } = useLogin();
 
-  function handleLogin(e) {
+  function handleLogin(e: React.SubmitEvent) {
     e.preventDefault();
 
     login({ username, password });
@@ -16,7 +16,7 @@ function LoginForm() {
 
   return (
     <div className="login-container">
-      <form className="login-form" onSubmit={(e) => handleLogin(e)}>
+      <form className="login-form" onSubmit={handleLogin}>
         <h2>Login</h2>
 
         <div className="input-group">

@@ -1,14 +1,19 @@
-import { useDispatch } from "react-redux";
 import { decItemQty, incItemQty, removeCartItem } from "../../redux/cartSlice";
 import { HiMiniXMark, HiOutlineMinus, HiOutlinePlus } from "react-icons/hi2";
 import { Link } from "react-router";
-import toast from "react-hot-toast";
+import toast, { Renderable } from "react-hot-toast";
 import { useState } from "react";
 import Spinner from "../../ui/Spinner";
+import { CartProduct } from "../../services/apiDummyShop";
+import { useAppDispatch } from "../hooks/useAppDispatch";
 
-function CartItem({ product }) {
+type CartItemProps = {
+  product: CartProduct;
+};
+
+function CartItem({ product }: CartItemProps) {
   const [imgLoaded, setImgLoaded] = useState(false);
-  const dispatch = useDispatch();
+  const dispatch = useAppDispatch();
   const { thumbnail, title, discountPercentage, quantity, id, price } = product;
 
   const discountedTotal = Number(
@@ -17,7 +22,7 @@ function CartItem({ product }) {
 
   if (!quantity) return null;
 
-  function showToast(message, icon) {
+  function showToast(message: Renderable, icon: string) {
     toast.success(message, { icon });
   }
 

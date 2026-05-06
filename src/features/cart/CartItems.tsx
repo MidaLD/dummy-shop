@@ -1,16 +1,16 @@
-import { useDispatch, useSelector } from "react-redux";
 import { clearCart } from "../../redux/cartSlice";
 import toast from "react-hot-toast";
 import CartItem from "./CartItem";
 import { Link } from "react-router";
 import { HiArrowLongLeft } from "react-icons/hi2";
 import { selectTotalQuantity } from "../../redux/selectors/cartSelectors";
+import { useAppSelector } from "../hooks/useAppSelector";
+import { useAppDispatch } from "../hooks/useAppDispatch";
 
 function CartItems() {
-  const totalQuantity = useSelector(selectTotalQuantity);
-
-  const dispatch = useDispatch();
-  const products = useSelector((store) => store.cart.products);
+  const totalQuantity = useAppSelector(selectTotalQuantity);
+  const dispatch = useAppDispatch();
+  const products = useAppSelector((store) => store.cart.products);
 
   function handleClearCart() {
     dispatch(clearCart());
