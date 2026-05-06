@@ -8,7 +8,6 @@ import { useCurrentUser } from "../features/authentication/useCurrentUser";
 import { useEffect } from "react";
 import { setCart, setCartId } from "../redux/cartSlice";
 import { useIsLargeDesktop } from "../features/hooks/useIsLargeDesktop";
-import { RootState } from "../redux/store";
 import { useAppSelector } from "../features/hooks/useAppSelector";
 import { useAppDispatch } from "../features/hooks/useAppDispatch";
 

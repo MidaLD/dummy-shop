@@ -1,10 +1,10 @@
 import {
   selectDiscountedTotal,
   selectTotalQuantity,
-} from "../../redux/selectors/cartSelectors";
-import CartItems from "./CartItems";
-import CheckoutSummary from "./CheckoutSummary";
-import { useAppSelector } from "../hooks/useAppSelector";
+} from "../redux/selectors/cartSelectors";
+import CartItems from "../features/cart/CartItems";
+import CheckoutSummary from "../features/cart/CheckoutSummary";
+import { useAppSelector } from "../features/hooks/useAppSelector";
 
 function CartPage() {
   const totalQuantity = useAppSelector(selectTotalQuantity);

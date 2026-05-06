@@ -1,15 +1,15 @@
 import { useSelector } from "react-redux";
-import Spinner from "../../ui/Spinner";
-import ProductItem from "./ProductItem";
-import { useAllProducts } from "./useAllProducts";
-import { useSearchProducts } from "./useSearchProducts";
+import Spinner from "../ui/Spinner";
+import ProductItem from "../features/shop/ProductItem";
+import { useAllProducts } from "../features/shop/useAllProducts";
+import { useSearchProducts } from "../features/shop/useSearchProducts";
 import { useSearchParams } from "react-router";
-import Pagination from "../../ui/Pagination";
-import { useIsMobile } from "../hooks/useIsMobile";
-import { RootState } from "../../redux/store";
-import { useAppSelector } from "../hooks/useAppSelector";
+import Pagination from "../ui/Pagination";
+import { useIsMobile } from "../features/hooks/useIsMobile";
+import { RootState } from "../redux/store";
+import { useAppSelector } from "../features/hooks/useAppSelector";
 
-function Shop() {
+function ShopPage() {
   const [searchParams] = useSearchParams();
 
   const category = searchParams.get("category");
@@ -65,4 +65,4 @@ function Shop() {
   );
 }
 
-export default Shop;
+export default ShopPage;

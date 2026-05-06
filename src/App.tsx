@@ -1,18 +1,17 @@
 import "./App.css";
-
 import { BrowserRouter, Route, Routes } from "react-router-dom";
 import AppLayout from "./ui/AppLayout";
-import Shop from "./features/shop/Shop";
-import CartPage from "./features/cart/CartPage";
+import CartPage from "./pages/CartPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
 import ProductDetailsPage from "./features/shop/ProductDetailsPage";
-import LoginForm from "./features/authentication/LoginForm";
-import UserProfile from "./features/user/UserProfile";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./features/user/ProtectedRoute";
 import PageNotFound from "./ui/PageNotFound";
 import { useIsMobile } from "./features/hooks/useIsMobile";
+import UserProfilePage from "./pages/UserProfilePage";
+import ShopPage from "./pages/ShopPage";
+import LoginFormPage from "./pages/LoginFormPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -31,9 +30,9 @@ function App() {
       <ReactQueryDevtools initialIsOpen={false} />
       <BrowserRouter>
         <Routes>
-          <Route path="/login" element={<LoginForm />} />
+          <Route path="/login" element={<LoginFormPage />} />
           <Route element={<AppLayout />}>
-            <Route path="/" element={<Shop />} />
+            <Route path="/" element={<ShopPage />} />
             <Route
               path="/product-details/:productId"
               element={<ProductDetailsPage />}
@@ -44,7 +43,7 @@ function App() {
               path="/user"
               element={
                 <ProtectedRoute>
-                  <UserProfile />
+                  <UserProfilePage />
                 </ProtectedRoute>
               }
             />

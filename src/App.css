@@ -111,6 +111,10 @@ grays: #1c1917
   position: relative;
 }
 
+.heading {
+  font-size: 3rem;
+}
+
 .header-container {
   display: flex;
   flex-direction: row;

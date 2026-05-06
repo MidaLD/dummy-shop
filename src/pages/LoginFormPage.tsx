@@ -1,8 +1,8 @@
 import { useState } from "react";
-import { useLogin } from "./useLogin";
-import Spinner from "../../ui/Spinner";
+import { useLogin } from "../features/authentication/useLogin";
+import Spinner from "../ui/Spinner";
 
-function LoginForm() {
+function LoginFormPage() {
   const [username, setUsername] = useState("liamg");
   const [password, setPassword] = useState("liamgpass");
 
@@ -57,4 +57,4 @@ function LoginForm() {
   );
 }
 
-export default LoginForm;
+export default LoginFormPage;

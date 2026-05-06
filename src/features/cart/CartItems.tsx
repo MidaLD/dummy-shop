@@ -6,6 +6,7 @@ import { HiArrowLongLeft } from "react-icons/hi2";
 import { selectTotalQuantity } from "../../redux/selectors/cartSelectors";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useAppDispatch } from "../hooks/useAppDispatch";
+import Heading from "../../ui/Heading";
 
 function CartItems() {
   const totalQuantity = useAppSelector(selectTotalQuantity);
@@ -21,7 +22,7 @@ function CartItems() {
   return (
     <div className="cart-box">
       <div className="cart-header">
-        <h2>Shopping Cart</h2>
+        <Heading>Shopping Cart</Heading>
         <p>{totalQuantity} Items</p>
       </div>
 
