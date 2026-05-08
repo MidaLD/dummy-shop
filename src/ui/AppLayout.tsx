@@ -26,6 +26,8 @@ function AppLayout() {
   useEffect(() => {
     if (!isSuccess || !userCart) return;
 
+    console.log(userCart, cartId);
+
     if (isSuccess && userCart?.id !== cartId) {
       dispatch(setCart(userCart.products));
       dispatch(setCartId(userCart.id));

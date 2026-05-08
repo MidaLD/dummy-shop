@@ -1,7 +1,7 @@
 import { useState } from "react";
 import toast from "react-hot-toast";
 import { useDispatch, useSelector } from "react-redux";
-import { clearCart } from "../../redux/cartSlice";
+import { clearCart, setCartId } from "../../redux/cartSlice";
 import { useNavigate } from "react-router";
 import Button from "../../ui/Button";
 import { selectTotalQuantity } from "../../redux/selectors/cartSelectors";
