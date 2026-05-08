@@ -1229,10 +1229,6 @@ main {
     flex: auto;
   }
 
-  .cart-img-box img {
-    /* max-width: 2rem; */
-  }
-
   .categories-menu {
     height: 100%;
   }
