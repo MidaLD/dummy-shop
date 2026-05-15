@@ -1,6 +1,4 @@
 import {
-  HiMiniChevronDown,
-  HiMiniChevronUp,
   HiMiniUserCircle,
   HiArrowRightOnRectangle,
   HiUser,
@@ -38,21 +36,16 @@ function UserMenu() {
         <>
           <button
             onClick={handleUserMenu}
-            className="flex items-center gap-2 rounded-lg px-2 py-1.5 hover:bg-white/10 transition-all duration-200"
+            className="flex items-center gap-2 rounded-full pl-0.5 pr-3 py-0.5 hover:bg-white/10 transition-all duration-200 max-w-[160px] sm:max-w-[200px]"
           >
             <img
-              className="w-7 h-7 rounded-full object-cover ring-2 ring-white/30"
+              className="w-7 h-7 rounded-full object-cover shrink-0 ring-2 ring-white/30"
               src={currentUser.image}
               alt=""
             />
-            <span className="hidden sm:block text-sm font-medium text-white">
+            <span className="hidden sm:block text-sm font-medium text-white truncate">
               {currentUser.firstName}
             </span>
-            {userMenuOpen ? (
-              <HiMiniChevronUp className="w-3.5 h-3.5 text-slate-300" />
-            ) : (
-              <HiMiniChevronDown className="w-3.5 h-3.5 text-slate-300" />
-            )}
           </button>
 
           {userMenuOpen && (
