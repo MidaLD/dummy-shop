@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { createPortal } from "react-dom";
-import { HiChevronLeft, HiChevronRight, HiMiniXCircle } from "react-icons/hi2";
+import { HiChevronLeft, HiChevronRight, HiXMark } from "react-icons/hi2";
 import { useOutsideClick } from "../hooks/useOutsideClick";
 import Spinner from "../../ui/Spinner";
 import ProductGalleryImage from "./ProductGalleryImage";
@@ -34,45 +34,71 @@ function ProductGalleryModal({
   }
 
   return createPortal(
-    <div className="gallery-overlay">
-      <div className="modal-box" ref={ref}>
-        <div className="modal-image-box">
-          {numImages > 1 && (
-            <>
-              <button onClick={handlePrevImage} className="modal-btn-left">
-                <HiChevronLeft className="modal-icon" />
-              </button>
-              <button onClick={handleNextImage} className="modal-btn-right">
-                <HiChevronRight className="modal-icon" />
-              </button>
-            </>
-          )}
+    <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm">
+      <div className="flex min-h-full items-center justify-center p-4">
+        <div
+          ref={ref}
+          className="relative my-4 flex w-full max-w-3xl flex-col overflow-hidden rounded-2xl bg-white shadow-2xl"
+        >
+          {/* Close button */}
+          <button
+            onClick={handleCloseGallery}
+            className="absolute right-3 top-3 z-10 flex h-8 w-8 cursor-pointer items-center justify-center rounded-full bg-white/90 text-slate-500 shadow-sm backdrop-blur-sm transition-colors hover:bg-slate-100 hover:text-slate-800"
+          >
+            <HiXMark className="h-4 w-4" />
+          </button>
 
-          {!imgLoaded && <Spinner />}
-          <img
-            className="modal-image"
-            src={images[mainImageIndex]}
-            onLoad={() => setImgLoaded(true)}
-          />
-        </div>
-        {numImages > 1 && (
-          <div className="modal-thumbnails-box">
-            {images.map((image, i) => (
-              <ProductGalleryImage
-                onClick={() => handleSelectImage(i)}
-                className={`modal-thumbnail ${
-                  mainImageIndex === i ? "selected-image" : ""
-                }`}
-                key={i}
-                src={image}
-              />
-            ))}
+          {/* Main image */}
+          <div className="relative aspect-square w-full overflow-hidden bg-slate-50">
+            {numImages > 1 && (
+              <>
+                <button
+                  onClick={handlePrevImage}
+                  className="absolute left-3 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white/90 text-slate-600 shadow-sm backdrop-blur-sm transition-colors hover:bg-white hover:text-slate-800 active:scale-95"
+                >
+                  <HiChevronLeft className="h-5 w-5" />
+                </button>
+                <button
+                  onClick={handleNextImage}
+                  className="absolute right-3 top-1/2 z-10 flex h-9 w-9 -translate-y-1/2 cursor-pointer items-center justify-center rounded-full bg-white/90 text-slate-600 shadow-sm backdrop-blur-sm transition-colors hover:bg-white hover:text-slate-800 active:scale-95"
+                >
+                  <HiChevronRight className="h-5 w-5" />
+                </button>
+              </>
+            )}
+
+            {!imgLoaded && (
+              <div className="absolute inset-0 flex items-center justify-center">
+                <Spinner />
+              </div>
+            )}
+            <img
+              className={`h-full w-full object-contain transition-opacity duration-200 ${
+                imgLoaded ? "opacity-100" : "opacity-0"
+              }`}
+              src={images[mainImageIndex]}
+              onLoad={() => setImgLoaded(true)}
+            />
           </div>
-        )}
 
-        <button onClick={handleCloseGallery} className="modal-close-btn">
-          <HiMiniXCircle className="modal-close-icon" />
-        </button>
+          {/* Thumbnails */}
+          {numImages > 1 && (
+            <div className="flex gap-2 overflow-x-auto border-t border-slate-100 p-3">
+              {images.map((image, i) => (
+                <ProductGalleryImage
+                  key={i}
+                  onClick={() => handleSelectImage(i)}
+                  className={`relative h-16 w-16 shrink-0 cursor-pointer overflow-hidden rounded-lg border-2 transition-all duration-150 ${
+                    mainImageIndex === i
+                      ? "border-slate-700"
+                      : "border-transparent hover:border-slate-300"
+                  }`}
+                  src={image}
+                />
+              ))}
+            </div>
+          )}
+        </div>
       </div>
     </div>,
     document.getElementById("root") ?? document.body,

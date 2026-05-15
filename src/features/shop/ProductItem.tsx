@@ -100,7 +100,9 @@ function ProductItem({ product }: ProductItemProps) {
               -{Math.round(discountPercentage)}%
             </span>
           </div>
-          <p className="text-xs text-slate-500">★ {rating.toFixed(1)}</p>
+          <p className="text-xs text-slate-500">
+            <span style={{ color: "#fbbf24" }}>★</span> {rating.toFixed(1)}
+          </p>
         </div>
       </Link>
 

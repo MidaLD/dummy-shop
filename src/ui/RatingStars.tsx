@@ -10,17 +10,21 @@ function RatingStars({ rating, ratingNum = true }: RatingStartProps) {
 
   for (let i = 1; i <= 5; i++) {
     if (rating >= i) {
-      stars.push(<FaStar key={i} color="#f5a623" />);
+      stars.push(<FaStar key={i} color="#fbbf24" />);
     } else if (rating >= i - 0.5) {
-      stars.push(<FaStarHalfAlt key={i} color="#f5a623" />);
+      stars.push(<FaStarHalfAlt key={i} color="#fbbf24" />);
     } else {
-      stars.push(<FaRegStar key={i} color="#f5a623" />);
+      stars.push(<FaRegStar key={i} color="#fbbf24" />);
     }
   }
 
   return (
-    <div className="rating">
-      {ratingNum && <span className="rating-num">{rating}</span>}
+    <div className="flex items-center gap-0.5 text-sm">
+      {ratingNum && (
+        <span className="mr-1 text-xs text-slate-500">
+          {rating.toFixed(1)}
+        </span>
+      )}
       {stars}
     </div>
   );
