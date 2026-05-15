@@ -12,16 +12,17 @@ function CartPage() {
 
   if (totalQuantity <= 0)
     return (
-      <div className="empty-message">
-        <p>Your cart is empty.</p>
+      <div className="flex min-h-[60vh] items-center justify-center">
+        <p className="text-sm text-slate-500">Your cart is empty.</p>
       </div>
     );
 
   return (
-    <div className="cart-container">
-      <CartItems />
-
-      <CheckoutSummary discountedTotal={discountedTotal} />
+    <div className="mx-auto max-w-6xl px-4 py-8 sm:px-6 lg:px-8">
+      <div className="grid grid-cols-1 gap-6 lg:grid-cols-[1fr_360px]">
+        <CartItems />
+        <CheckoutSummary discountedTotal={discountedTotal} />
+      </div>
     </div>
   );
 }

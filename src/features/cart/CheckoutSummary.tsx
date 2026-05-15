@@ -41,51 +41,59 @@ function CheckoutSummary({ discountedTotal }: CheckoutSummaryProps) {
   }
 
   return (
-    <div className="checkout-box">
-      <h3 className="checkout-header">Summary</h3>
+    <div className="flex flex-col gap-5 rounded-2xl border border-slate-100 bg-white p-6 shadow-sm lg:self-start lg:sticky lg:top-8">
+      <h3 className="text-lg font-semibold text-slate-800">Order Summary</h3>
+
+      <div className="border-t border-slate-100" />
 
       <SummaryRow
-        label={`ITEMS ${totalQuantity}`}
+        label={`Items (${totalQuantity})`}
         value={formatPrice(discountedTotal)}
       />
 
-      <div className="shipping-box">
-        <p>SHIPPING</p>
-
+      {/* Shipping */}
+      <div className="flex flex-col gap-1.5">
+        <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
+          Shipping
+        </p>
         <select
           value={shippingPrice}
           onChange={(e) => setShippingPrice(Number(e.target.value))}
+          className="w-full cursor-pointer rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 focus:outline-none focus:ring-2 focus:ring-slate-200"
         >
           {SHIPPING_OPTIONS.map((opt) => (
             <option key={opt.price} value={opt.price}>
-              {opt.label} $ {opt.price.toFixed(2)}
+              {opt.label} — $ {opt.price.toFixed(2)}
             </option>
           ))}
         </select>
       </div>
 
-      <div className="shipping-box">
-        <p>PROMO CODE</p>
-
+      {/* Promo code */}
+      <div className="flex flex-col gap-1.5">
+        <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
+          Promo Code
+        </p>
         <input
           value={promoCode}
           onChange={(e) => setPromoCode(e.target.value)}
-          className="promo-code-input"
+          className="w-full rounded-lg border border-slate-200 bg-white px-3 py-2 text-sm text-slate-700 placeholder:text-slate-300 focus:outline-none focus:ring-2 focus:ring-slate-200"
           type="text"
+          placeholder="Enter promo code"
         />
       </div>
 
-      <SummaryRow label="TOTAL PRICE" value={formatPrice(totalPrice)} />
+      <div className="border-t border-slate-200" />
 
-      <div className="checkout-btn-wrapper">
-        <Button
-          disabled={totalQuantity === 0}
-          onClick={handleCheckout}
-          className="button--sm"
-        >
-          CHECKOUT
-        </Button>
-      </div>
+      <SummaryRow label="Total" value={formatPrice(totalPrice)} total />
+
+      <Button
+        disabled={totalQuantity === 0}
+        onClick={handleCheckout}
+        className="w-full cursor-pointer rounded-xl bg-slate-700 py-3 text-sm font-medium text-white transition-colors hover:bg-slate-800 active:bg-slate-900 disabled:cursor-not-allowed disabled:opacity-50"
+      >
+        Checkout
+      </Button>
     </div>
   );
 }
