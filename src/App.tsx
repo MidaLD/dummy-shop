@@ -4,7 +4,7 @@ import AppLayout from "./ui/AppLayout";
 import CartPage from "./pages/CartPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import ProductDetailsPage from "./features/shop/ProductDetailsPage";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./features/user/ProtectedRoute";
 import PageNotFound from "./ui/PageNotFound";

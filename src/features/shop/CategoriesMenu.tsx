@@ -1,4 +1,3 @@
-import Spinner from "../../ui/Spinner";
 import CategoryItem from "./CategoryItem";
 import { useCategoriesList } from "./useCategoriesList";
 import { setSearchQuery, toggleCategoriesMenu } from "../../redux/shopSlice";

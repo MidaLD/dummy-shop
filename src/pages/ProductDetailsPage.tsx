@@ -1,15 +1,15 @@
 import { useParams } from "react-router";
-import { useProduct } from "./useProduct";
+import { useProduct } from "../features/shop/useProduct";
 import { useEffect, useState } from "react";
-import Spinner from "../../ui/Spinner";
-import { addToCart } from "../../redux/cartSlice";
-import { getDiscountedPrice, formatPrice } from "../../utils/helpers";
-import RatingStars from "../../ui/RatingStars";
-import ProductGalleryModal from "./ProductGalleryModal";
-import ReviewsContainer from "./ReviewsContainer";
+
+import { addToCart } from "../redux/cartSlice";
+import { getDiscountedPrice, formatPrice } from "../utils/helpers";
+import RatingStars from "../ui/RatingStars";
+import ProductGalleryModal from "../features/shop/ProductGalleryModal";
+import ReviewsContainer from "../features/shop/ReviewsContainer";
 import toast from "react-hot-toast";
-import Button from "../../ui/Button";
-import { useAppDispatch } from "../hooks/useAppDispatch";
+import Button from "../ui/Button";
+import { useAppDispatch } from "../features/hooks/useAppDispatch";
 
 function ProductDetailsPage() {
   const [imgLoaded, setImgLoaded] = useState(false);
@@ -28,7 +28,10 @@ function ProductDetailsPage() {
   if (isLoading)
     return (
       <div className="flex min-h-[60vh] items-center justify-center">
-        <Spinner />
+        <svg className="w-7 h-7 animate-spin text-slate-300" fill="none" viewBox="0 0 24 24">
+          <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
+          <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+        </svg>
       </div>
     );
 
@@ -139,7 +142,10 @@ function ProductDetailsPage() {
         >
           {!imgLoaded && (
             <div className="absolute inset-0 flex items-center justify-center">
-              <Spinner />
+              <svg className="w-7 h-7 animate-spin text-slate-300" fill="none" viewBox="0 0 24 24">
+                <circle className="opacity-25" cx="12" cy="12" r="10" stroke="currentColor" strokeWidth="3" />
+                <path className="opacity-75" fill="currentColor" d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z" />
+              </svg>
             </div>
           )}
           <img
