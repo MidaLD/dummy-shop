@@ -18,12 +18,16 @@ function UserMenu() {
     ? `${currentUser.firstName} ${currentUser.lastName}`
     : "";
 
-  function handleUserMenu() {
+  function handleToggleUserMenu() {
     setUserMenuOpen((prev) => !prev);
   }
 
   function handleLogout() {
     logout();
+  }
+
+  function handleCloseUserMenu(params: type) {
+    setUserMenuOpen(false);
   }
 
   const ref = useOutsideClick<HTMLDivElement>(() => setUserMenuOpen(false));
@@ -35,7 +39,7 @@ function UserMenu() {
       {currentUser ? (
         <>
           <button
-            onClick={handleUserMenu}
+            onClick={handleToggleUserMenu}
             className="cursor-pointer flex items-center gap-2 rounded-full pl-0.5 pr-3 py-0.5 hover:bg-white/10 transition-all duration-200 max-w-[160px] sm:max-w-[200px]"
           >
             <img
@@ -70,6 +74,7 @@ function UserMenu() {
                 <li>
                   <Link
                     to="/user"
+                    onClick={handleCloseUserMenu}
                     className="flex items-center gap-2.5 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
                   >
                     <HiUser className="w-4 h-4 text-slate-400 shrink-0" />

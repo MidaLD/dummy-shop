@@ -1,6 +1,6 @@
-function ProductItemSkeleton() {
+function ProductItemSkeleton({ className }: { className?: string }) {
   return (
-    <div className="flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm">
+    <div className={`flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm${className ? ` ${className}` : ""}`}>
       <div className="aspect-square animate-pulse bg-slate-200" />
 
       <div className="flex flex-1 flex-col gap-1 px-4 pb-2 pt-3">
