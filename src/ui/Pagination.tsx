@@ -128,8 +128,8 @@ function PaginationBtn({
         active
           ? "bg-slate-700 text-white shadow-sm cursor-default"
           : disabled
-            ? "text-slate-300 cursor-not-allowed"
-            : "text-slate-500 hover:bg-slate-100 hover:text-slate-800",
+            ? "text-slate-300"
+            : "text-slate-500 hover:bg-slate-100 cursor-pointer hover:text-slate-800",
       ].join(" ")}
     >
       {children}
