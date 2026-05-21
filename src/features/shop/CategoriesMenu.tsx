@@ -4,8 +4,8 @@ import { setSearchQuery, toggleCategoriesMenu } from "../../redux/shopSlice";
 import { useNavigate, useSearchParams } from "react-router";
 import { motion } from "motion/react";
 import { useOutsideClick } from "../hooks/useOutsideClick";
-import { useBreakpoint } from "../hooks/useBreakpoint";
 import { useAppDispatch } from "../hooks/useAppDispatch";
+import { useAppSelector } from "../hooks/useAppSelector";
 
 type CategoriesMenuProps = {
   showCategoriesFinal: boolean;
@@ -13,23 +13,15 @@ type CategoriesMenuProps = {
 
 function CategoriesMenu({ showCategoriesFinal }: CategoriesMenuProps) {
   const { categories, isLoading } = useCategoriesList();
-  const { "3xl": isLargeDesktop } = useBreakpoint();
+  const isLargeDesktop = useAppSelector((state) => state.breakpoints.xl2);
   const dispatch = useAppDispatch();
   const [searchParams, setSearchParams] = useSearchParams();
   const outsideRef = useOutsideClick<HTMLDivElement>(() => {
     if (!isLargeDesktop) dispatch(toggleCategoriesMenu());
   });
   const ref = isLargeDesktop ? null : outsideRef;
-  const navigate = useNavigate();
 
   const activeCategory = searchParams.get("category");
-
-  function handleAllProductsCat() {
-    searchParams.delete("category");
-    setSearchParams(searchParams);
-    dispatch(setSearchQuery(""));
-    navigate("/");
-  }
 
   return (
     <>
@@ -40,11 +32,7 @@ function CategoriesMenu({ showCategoriesFinal }: CategoriesMenuProps) {
         transition={{ duration: 0.2, type: "tween" }}
         key="categories-menu"
         ref={ref}
-        className={
-          isLargeDesktop
-            ? "flex flex-col w-56 shrink-0 border-r border-slate-100 bg-white overflow-y-auto"
-            : "absolute inset-y-0 left-0 z-20 flex flex-col w-64 bg-white shadow-2xl overflow-y-auto"
-        }
+        className="flex overflow-y-auto bg-white flex-col xl2:shrink-0 xl2:border-r xl2:border-slate-100 absolute xl2:relative inset-y-0 left-0 shadow-2xl z-20 w-64 xl2:w-56"
       >
         {isLoading ? (
           <CategoriesMenuSkeleton />
@@ -57,19 +45,7 @@ function CategoriesMenu({ showCategoriesFinal }: CategoriesMenuProps) {
             </div>
 
             <ul className="flex flex-col gap-0.5 p-2 overflow-y-auto">
-              <li>
-                <button
-                  onClick={handleAllProductsCat}
-                  className={[
-                    "cursor-pointer w-full text-left text-sm px-3 py-2 rounded-md transition-colors duration-150",
-                    !activeCategory
-                      ? "bg-slate-100 text-slate-900 font-semibold"
-                      : "text-slate-600 hover:bg-slate-50 hover:text-slate-900",
-                  ].join(" ")}
-                >
-                  All products
-                </button>
-              </li>
+              <CategoryItem category={{ name: "All products", slug: null }} />
 
               {categories?.map((category) => (
                 <CategoryItem category={category} key={category.slug} />

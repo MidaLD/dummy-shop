@@ -4,7 +4,6 @@ import { useAllProducts } from "../features/shop/useAllProducts";
 import { useSearchProducts } from "../features/shop/useSearchProducts";
 import { useSearchParams } from "react-router";
 import Pagination from "../ui/Pagination";
-import { useBreakpoint } from "../features/hooks/useBreakpoint";
 import { useAppSelector } from "../features/hooks/useAppSelector";
 
 function ShopPage() {
@@ -14,8 +13,7 @@ function ShopPage() {
   const page = Number(searchParams.get("page")) || 1;
   const query = useAppSelector((store) => store.shop.searchQuery);
 
-  const { sm, lg } = useBreakpoint();
-  const limit = lg ? 12 : sm ? 9 : 8;
+  const limit = 12;
 
   const { data, isLoading, isError, error } = useAllProducts({
     category,

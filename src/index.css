@@ -5,6 +5,10 @@
   --font-sans: "Inter", sans-serif;
 }
 
+@theme {
+  --breakpoint-xl2: 90rem; /* 1440px */
+}
+
 body {
   font-family: "Inter", sans-serif;
 }

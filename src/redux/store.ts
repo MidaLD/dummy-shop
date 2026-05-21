@@ -1,6 +1,7 @@
 import { configureStore, combineReducers } from "@reduxjs/toolkit";
 import shopReducer from "./shopSlice";
 import cartReducer from "./cartSlice";
+import breakpointReducer from "./breakpointSlice";
 
 import { persistStore, persistReducer } from "redux-persist";
 import storage from "redux-persist/lib/storage";
@@ -8,6 +9,7 @@ import storage from "redux-persist/lib/storage";
 const rootReducer = combineReducers({
   shop: shopReducer,
   cart: cartReducer,
+  breakpoints: breakpointReducer,
 });
 
 const persistConfig = {

@@ -7,10 +7,10 @@ import ProductDetailsPage from "./pages/ProductDetailsPage";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./features/user/ProtectedRoute";
 import PageNotFound from "./ui/PageNotFound";
-import { useBreakpoint } from "./features/hooks/useBreakpoint";
 import UserProfilePage from "./pages/UserProfilePage";
 import ShopPage from "./pages/ShopPage";
 import LoginFormPage from "./pages/LoginFormPage";
+import BreakpointInitializer from "./ui/BreakpointInitializer";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -22,10 +22,9 @@ const queryClient = new QueryClient({
 });
 
 function App() {
-  const { md } = useBreakpoint();
-
   return (
     <QueryClientProvider client={queryClient}>
+      <BreakpointInitializer />
       <ReactQueryDevtools initialIsOpen={false} />
       <BrowserRouter>
         <Routes>
@@ -52,7 +51,7 @@ function App() {
       </BrowserRouter>
 
       <Toaster
-        position={!md ? "bottom-center" : "bottom-right"}
+        position="bottom-right"
         gutter={12}
         containerStyle={{ margin: "8px" }}
         toastOptions={{

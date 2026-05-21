@@ -1,7 +1,7 @@
 export type Category = {
-  slug: string;
+  slug: string | null;
   name: string;
-  url: string;
+  url?: string;
 };
 
 export async function getCategoriesList(): Promise<Category[]> {

@@ -7,7 +7,6 @@ import {
 } from "react-icons/hi2";
 import { ReactNode } from "react";
 import { useSearchParams } from "react-router";
-import { useBreakpoint } from "../features/hooks/useBreakpoint";
 
 type PaginationProps = {
   numPages: number;
@@ -16,7 +15,6 @@ type PaginationProps = {
 function Pagination({ numPages }: PaginationProps) {
   const [searchParams, setSearchParams] = useSearchParams({ page: "1" });
   const currentPage = Number(searchParams.get("page")) || 1;
-  const { md } = useBreakpoint();
 
   function handlePageChange(newPage: string) {
     setSearchParams((prev) => {
@@ -43,7 +41,7 @@ function Pagination({ numPages }: PaginationProps) {
   }
 
   const pageNumbers = [];
-  const maxVisible = !md ? 5 : 7;
+  const maxVisible = 5;
   let startPage = Math.max(1, currentPage - Math.floor(maxVisible / 2));
   let endPage = startPage + maxVisible - 1;
 

@@ -7,15 +7,13 @@ import { useUserCart } from "../features/cart/useUserCart";
 import { useCurrentUser } from "../features/authentication/useCurrentUser";
 import { useEffect } from "react";
 import { setCart, setCartId } from "../redux/cartSlice";
-import { useBreakpoint } from "../features/hooks/useBreakpoint";
 import { useAppSelector } from "../features/hooks/useAppSelector";
 import { useAppDispatch } from "../features/hooks/useAppDispatch";
 
 function AppLayout() {
-  const { "3xl": isLargeDesktop } = useBreakpoint();
-
-  const { showCategories } = useAppSelector((store) => store.shop);
-  const { cartId } = useAppSelector((store) => store.cart);
+  const { showCategories } = useAppSelector((state) => state.shop);
+  const { cartId } = useAppSelector((state) => state.cart);
+  const isLargeDesktop = useAppSelector((state) => state.breakpoints.xl2);
 
   const dispatch = useAppDispatch();
 

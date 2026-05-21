@@ -17,6 +17,14 @@ function CategoryItem({ category }: CategoryItemProps) {
   const isActive = searchParams.get("category") === slug;
 
   function handleSetCategory() {
+    if (!slug) {
+      searchParams.delete("category");
+      setSearchParams(searchParams);
+      dispatch(setSearchQuery(""));
+      navigate("/");
+      return;
+    }
+
     searchParams.set("category", slug);
     searchParams.set("page", "1");
     setSearchParams(searchParams);
