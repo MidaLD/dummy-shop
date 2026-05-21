@@ -8,11 +8,9 @@ import { useAppDispatch } from "../hooks/useAppDispatch";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useCallback } from "react";
 
-type CategoriesMenuProps = {
-  showCategoriesFinal: boolean;
-};
+const ALL_PRODUCTS_CATEGORY = { name: "All products", slug: null } as const;
 
-function CategoriesMenu({ showCategoriesFinal }: CategoriesMenuProps) {
+function CategoriesMenu() {
   const { categories, isLoading } = useCategoriesList();
   const isLargeDesktop = useAppSelector((state) => state.breakpoints.xl2);
   const dispatch = useAppDispatch();
@@ -41,56 +39,44 @@ function CategoriesMenu({ showCategoriesFinal }: CategoriesMenuProps) {
   );
 
   return (
-    <>
-      <motion.div
-        initial={isLargeDesktop ? false : { x: "-100%" }}
-        animate={{ x: 0 }}
-        exit={isLargeDesktop ? {} : { x: "-100%" }}
-        transition={{ duration: 0.2, type: "tween" }}
-        key="categories-menu"
-        ref={ref}
-        className="flex overflow-y-auto bg-white flex-col xl2:shrink-0 xl2:border-r xl2:border-slate-100 absolute xl2:relative inset-y-0 left-0 shadow-2xl z-20 w-64 xl2:w-56"
-      >
-        {isLoading ? (
-          <CategoriesMenuSkeleton />
-        ) : (
-          <>
-            <div className="px-4 py-4 border-b border-slate-100">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                Categories
-              </span>
-            </div>
+    <motion.div
+      initial={isLargeDesktop ? false : { x: "-100%" }}
+      animate={{ x: 0 }}
+      exit={isLargeDesktop ? {} : { x: "-100%" }}
+      transition={{ duration: 0.2, type: "tween" }}
+      key="categories-menu"
+      ref={ref}
+      className="flex overflow-y-auto bg-white flex-col xl2:shrink-0 xl2:border-r xl2:border-slate-100 absolute xl2:relative inset-y-0 left-0 shadow-2xl z-20 w-64 xl2:w-56"
+    >
+      {isLoading ? (
+        <CategoriesMenuSkeleton />
+      ) : (
+        <>
+          <div className="px-4 py-4 border-b border-slate-100">
+            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+              Categories
+            </span>
+          </div>
 
-            <ul className="flex flex-col gap-0.5 p-2 overflow-y-auto">
+          <ul className="flex flex-col gap-0.5 p-2 overflow-y-auto">
+            <CategoryItem
+              category={ALL_PRODUCTS_CATEGORY}
+              isActive={activeCategory === null}
+              onSelect={handleSelect}
+            />
+
+            {categories?.map((category) => (
               <CategoryItem
-                category={{ name: "All products", slug: null }}
-                isActive={activeCategory === null}
+                category={category}
+                isActive={category.slug === activeCategory}
                 onSelect={handleSelect}
+                key={category.slug}
               />
-
-              {categories?.map((category) => (
-                <CategoryItem
-                  category={category}
-                  isActive={category.slug === activeCategory}
-                  onSelect={handleSelect}
-                  key={category.slug}
-                />
-              ))}
-            </ul>
-          </>
-        )}
-      </motion.div>
-
-      {!isLargeDesktop && showCategoriesFinal && (
-        <motion.div
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
-          transition={{ duration: 0.2 }}
-          className="absolute inset-0 z-10 bg-black/20"
-        />
+            ))}
+          </ul>
+        </>
       )}
-    </>
+    </motion.div>
   );
 }
 

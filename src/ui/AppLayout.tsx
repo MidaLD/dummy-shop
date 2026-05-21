@@ -9,6 +9,7 @@ import { useEffect } from "react";
 import { setCart, setCartId } from "../redux/cartSlice";
 import { useAppSelector } from "../features/hooks/useAppSelector";
 import { useAppDispatch } from "../features/hooks/useAppDispatch";
+import { motion } from "motion/react";
 
 function AppLayout() {
   const { showCategories } = useAppSelector((state) => state.shop);
@@ -40,10 +41,18 @@ function AppLayout() {
 
       <main className="relative flex">
         <AnimatePresence mode="wait">
-          {showCategoriesFinal && (
-            <CategoriesMenu
-              showCategoriesFinal={showCategoriesFinal}
-              key="categories-menu"
+          {showCategoriesFinal && <CategoriesMenu key="categories-menu" />}
+        </AnimatePresence>
+
+        <AnimatePresence>
+          {showCategories && !isLargeDesktop && (
+            <motion.div
+              key="backdrop"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.2 }}
+              className="absolute inset-0 z-10 bg-black/20"
             />
           )}
         </AnimatePresence>

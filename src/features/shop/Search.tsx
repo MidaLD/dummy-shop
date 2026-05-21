@@ -13,6 +13,8 @@ function Search() {
   const page = searchParams.get("page");
   const searchQuery = useAppSelector((store) => store.shop.searchQuery);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
+  const [inputValue, setInputValue] = useState(searchQuery);
+  const [isDebouncing, setIsDebouncing] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
   const ref = useOutsideClick<HTMLDivElement>(() => setIsSearchOpen(false));
 
@@ -21,19 +23,30 @@ function Search() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (inputValue === searchQuery) return;
+
+    setIsDebouncing(true);
+    const timer = setTimeout(() => {
+      if (page !== "1") {
+        searchParams.set("page", "1");
+        setSearchParams(searchParams);
+      }
+      if (location.pathname !== "/") navigate("/");
+      queryClient.cancelQueries({ queryKey: ["search"] });
+      dispatch(setSearchQuery(inputValue));
+      setIsDebouncing(false);
+    }, 400);
+
+    return () => clearTimeout(timer);
+  }, [inputValue]);
+
   function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
-    if (page !== "1") {
-      searchParams.set("page", "1");
-      setSearchParams(searchParams);
-    }
-
-    if (location.pathname !== "/") navigate("/");
-
-    queryClient.cancelQueries({ queryKey: ["search"] });
-    dispatch(setSearchQuery(e.target.value));
+    setInputValue(e.target.value);
   }
 
   function handleClearSearchQuery() {
+    setInputValue("");
     dispatch(setSearchQuery(""));
   }
 
@@ -64,7 +77,11 @@ function Search() {
             transition={{ duration: 0.2, type: "tween" }}
             className="fixed md:hidden inset-x-0 top-0 z-50 flex items-center gap-3 bg-slate-700 px-5 py-5 shadow-xl"
           >
-            <HiMagnifyingGlass className="w-5 h-5 shrink-0 text-slate-300" />
+            {isDebouncing ? (
+              <div className="shrink-0 w-5 h-5 rounded-full border-2 border-slate-300 border-t-transparent animate-spin" />
+            ) : (
+              <HiMagnifyingGlass className="w-5 h-5 shrink-0 text-slate-300" />
+            )}
             <input
               ref={inputRef}
               onFocus={handleClearSearchQuery}
@@ -74,7 +91,7 @@ function Search() {
               type="text"
               placeholder="Search products..."
               autoComplete="off"
-              value={searchQuery}
+              value={inputValue}
             />
             {searchQuery && (
               <button
@@ -95,7 +112,11 @@ function Search() {
       </AnimatePresence>
 
       <div className="relative hidden md:flex items-center">
-        <HiMagnifyingGlass className="pointer-events-none absolute left-3 w-4 h-4 text-slate-400" />
+        {isDebouncing ? (
+          <div className="pointer-events-none absolute left-3 w-4 h-4 rounded-full border-2 border-slate-400 border-t-transparent animate-spin" />
+        ) : (
+          <HiMagnifyingGlass className="pointer-events-none absolute left-3 w-4 h-4 text-slate-400" />
+        )}
         <input
           onFocus={handleClearSearchQuery}
           onChange={handleOnChange}
@@ -104,7 +125,7 @@ function Search() {
           type="text"
           placeholder="Search products..."
           autoComplete="off"
-          value={searchQuery}
+          value={inputValue}
         />
         {searchQuery && (
           <button
