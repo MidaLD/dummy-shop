@@ -1,4 +1,5 @@
 import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { lazy, Suspense } from "react";
 import AppLayout from "./ui/AppLayout";
 import CartPage from "./pages/CartPage";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
@@ -7,9 +8,9 @@ import ProductDetailsPage from "./pages/ProductDetailsPage";
 import { Toaster } from "react-hot-toast";
 import ProtectedRoute from "./features/user/ProtectedRoute";
 import PageNotFound from "./ui/PageNotFound";
-import UserProfilePage from "./pages/UserProfilePage";
+const UserProfilePage = lazy(() => import("./pages/UserProfilePage"));
+const LoginFormPage = lazy(() => import("./pages/LoginFormPage"));
 import ShopPage from "./pages/ShopPage";
-import LoginFormPage from "./pages/LoginFormPage";
 import BreakpointInitializer from "./ui/BreakpointInitializer";
 
 const queryClient = new QueryClient({
@@ -27,27 +28,29 @@ function App() {
       <BreakpointInitializer />
       <ReactQueryDevtools initialIsOpen={false} />
       <BrowserRouter>
-        <Routes>
-          <Route path="/login" element={<LoginFormPage />} />
-          <Route element={<AppLayout />}>
-            <Route path="/" element={<ShopPage />} />
-            <Route
-              path="/product-details/:productId"
-              element={<ProductDetailsPage />}
-            />
-            <Route path="/cart" element={<CartPage />} />
+        <Suspense>
+          <Routes>
+            <Route path="/login" element={<LoginFormPage />} />
+            <Route element={<AppLayout />}>
+              <Route path="/" element={<ShopPage />} />
+              <Route
+                path="/product-details/:productId"
+                element={<ProductDetailsPage />}
+              />
+              <Route path="/cart" element={<CartPage />} />
 
-            <Route
-              path="/user"
-              element={
-                <ProtectedRoute>
-                  <UserProfilePage />
-                </ProtectedRoute>
-              }
-            />
-          </Route>
-          <Route path="*" element={<PageNotFound />} />
-        </Routes>
+              <Route
+                path="/user"
+                element={
+                  <ProtectedRoute>
+                    <UserProfilePage />
+                  </ProtectedRoute>
+                }
+              />
+            </Route>
+            <Route path="*" element={<PageNotFound />} />
+          </Routes>
+        </Suspense>
       </BrowserRouter>
 
       <Toaster

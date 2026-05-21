@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { createPortal } from "react-dom";
 import { HiChevronLeft, HiChevronRight, HiXMark } from "react-icons/hi2";
 import { useOutsideClick } from "../hooks/useOutsideClick";
@@ -32,6 +32,10 @@ function ProductGalleryModal({
     if (mainImageIndex >= numImages - 1) setMainImageIndex(0);
     else setMainImageIndex((prev) => prev + 1);
   }
+
+  useEffect(() => {
+    setImgLoaded(false);
+  }, [mainImageIndex]);
 
   return createPortal(
     <div className="fixed inset-0 z-50 overflow-y-auto bg-black/60 backdrop-blur-sm">

@@ -86,6 +86,7 @@ function CartItem({ product }: CartItemProps) {
           </div>
         )}
         <img
+          loading="lazy"
           onLoad={() => setImgLoaded(true)}
           src={thumbnail}
           alt=""

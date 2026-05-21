@@ -31,8 +31,6 @@ function AppLayout() {
     }
   }, [isSuccess, userCart, dispatch, cartId]);
 
-  if (isUserLoading || isLoading) return null;
-
   const showCategoriesFinal = isLargeDesktop || showCategories;
 
   return (

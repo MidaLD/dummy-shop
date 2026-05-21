@@ -19,6 +19,7 @@ function ShopPage() {
     category,
     page,
     limit,
+    enabled: !query,
   });
   const { searchedProducts, isLoadingSearch } = useSearchProducts({
     query,

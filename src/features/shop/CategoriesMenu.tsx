@@ -46,7 +46,7 @@ function CategoriesMenu() {
       transition={{ duration: 0.2, type: "tween" }}
       key="categories-menu"
       ref={ref}
-      className="flex overflow-y-auto bg-white flex-col xl2:shrink-0 xl2:border-r xl2:border-slate-100 absolute xl2:relative inset-y-0 left-0 shadow-2xl z-20 w-64 xl2:w-56"
+      className="flex overflow-y-auto bg-white flex-col xl2:shrink-0 xl2:border-r xl2:border-slate-100 absolute xl2:relative inset-y-0 left-0 shadow-2xl z-20 w-64 "
     >
       {isLoading ? (
         <CategoriesMenuSkeleton />

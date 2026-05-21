@@ -5,7 +5,7 @@ import {
 } from "react-icons/hi2";
 import { Link } from "react-router";
 import { useCurrentUser } from "../authentication/useCurrentUser";
-import { useState } from "react";
+import { useCallback, useState } from "react";
 import { useLogout } from "../authentication/useLogout";
 import { useOutsideClick } from "../hooks/useOutsideClick";
 
@@ -13,6 +13,8 @@ function UserMenu() {
   const [userMenuOpen, setUserMenuOpen] = useState(false);
   const { currentUser, isLoading } = useCurrentUser();
   const logout = useLogout();
+  const handleOutsideClick = useCallback(() => setUserMenuOpen(false), []);
+  const ref = useOutsideClick<HTMLDivElement>(handleOutsideClick);
 
   const fullName = currentUser
     ? `${currentUser.firstName} ${currentUser.lastName}`
@@ -29,8 +31,6 @@ function UserMenu() {
   function handleCloseUserMenu() {
     setUserMenuOpen(false);
   }
-
-  const ref = useOutsideClick<HTMLDivElement>(() => setUserMenuOpen(false));
 
   if (isLoading) return null;
 

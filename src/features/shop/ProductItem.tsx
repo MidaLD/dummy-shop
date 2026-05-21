@@ -4,7 +4,7 @@ import { addToCart } from "../../redux/cartSlice";
 import { useQueryClient } from "@tanstack/react-query";
 import { getProduct } from "../../services/apiDummyShop";
 import { getDiscountedPrice, formatPrice } from "../../utils/helpers";
-import { useState } from "react";
+import { memo, useState } from "react";
 
 import toast from "react-hot-toast";
 import Button from "../../ui/Button";
@@ -15,7 +15,7 @@ type ProductItemProps = {
   product: Product;
 };
 
-function ProductItem({ product }: ProductItemProps) {
+const ProductItem = memo(function ({ product }: ProductItemProps) {
   const [imgLoaded, setImgLoaded] = useState(false);
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
@@ -53,13 +53,7 @@ function ProductItem({ product }: ProductItemProps) {
   }
 
   return (
-    <motion.div
-      initial={{ opacity: 0 }}
-      animate={{ opacity: 1, x: 0 }}
-      whileHover={{ scale: 1.01 }}
-      transition={{ duration: 0.1, type: "tween", stiffness: 300 }}
-      className="group flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md"
-    >
+    <div className="group flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md">
       <Link
         onMouseEnter={handleMouseEnter}
         className="flex flex-col flex-1"
@@ -89,11 +83,9 @@ function ProductItem({ product }: ProductItemProps) {
               </svg>
             </div>
           )}
-          <motion.img
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.3, type: "tween" }}
+          <img
             className="h-full w-full object-cover transition-transform duration-300 group-hover:scale-105"
+            loading="lazy"
             src={thumbnail}
             alt=""
             onLoad={() => setImgLoaded(true)}
@@ -137,8 +129,8 @@ function ProductItem({ product }: ProductItemProps) {
           Add to cart
         </Button>
       </div>
-    </motion.div>
+    </div>
   );
-}
+});
 
 export default ProductItem;

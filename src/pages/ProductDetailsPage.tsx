@@ -10,6 +10,7 @@ import ReviewsContainer from "../features/shop/ReviewsContainer";
 import toast from "react-hot-toast";
 import Button from "../ui/Button";
 import { useAppDispatch } from "../features/hooks/useAppDispatch";
+import SpinnerFullPage from "../ui/SpinnerFullPage";
 
 function ProductDetailsPage() {
   const [imgLoaded, setImgLoaded] = useState(false);
@@ -25,30 +26,7 @@ function ProductDetailsPage() {
     window.scrollTo(0, 0);
   }, []);
 
-  if (isLoading)
-    return (
-      <div className="flex min-h-[60vh] items-center justify-center">
-        <svg
-          className="w-7 h-7 animate-spin text-slate-300"
-          fill="none"
-          viewBox="0 0 24 24"
-        >
-          <circle
-            className="opacity-25"
-            cx="12"
-            cy="12"
-            r="10"
-            stroke="currentColor"
-            strokeWidth="3"
-          />
-          <path
-            className="opacity-75"
-            fill="currentColor"
-            d="M4 12a8 8 0 018-8v4a4 4 0 00-4 4H4z"
-          />
-        </svg>
-      </div>
-    );
+  if (isLoading) return <SpinnerFullPage />;
 
   if (error || !product)
     return (
@@ -178,6 +156,7 @@ function ProductDetailsPage() {
             className={`h-full w-full object-contain transition-transform duration-300 group-hover:scale-105 ${
               imgLoaded ? "opacity-100" : "opacity-0"
             }`}
+            fetchPriority="high"
             src={images[0]}
             alt={title}
             onLoad={() => setImgLoaded(true)}

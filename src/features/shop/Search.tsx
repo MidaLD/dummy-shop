@@ -2,7 +2,7 @@ import { setSearchQuery } from "../../redux/shopSlice";
 import { useQueryClient } from "@tanstack/react-query";
 import { useLocation, useNavigate, useSearchParams } from "react-router";
 import { HiMagnifyingGlass, HiOutlineXMark } from "react-icons/hi2";
-import { ChangeEvent, useEffect, useRef, useState } from "react";
+import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useAppDispatch } from "../hooks/useAppDispatch";
@@ -16,7 +16,9 @@ function Search() {
   const [inputValue, setInputValue] = useState(searchQuery);
   const [isDebouncing, setIsDebouncing] = useState(false);
   const inputRef = useRef<HTMLInputElement | null>(null);
-  const ref = useOutsideClick<HTMLDivElement>(() => setIsSearchOpen(false));
+
+  const handleOutsideClick = useCallback(() => setIsSearchOpen(false), []);
+  const ref = useOutsideClick<HTMLDivElement>(handleOutsideClick);
 
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
@@ -102,7 +104,7 @@ function Search() {
               </button>
             )}
             <button
-              onClick={() => setIsSearchOpen(false)}
+              onClick={handleOutsideClick}
               className="cursor-pointer shrink-0 p-1 text-slate-300 hover:text-white transition-colors"
             >
               <HiOutlineXMark className="w-5 h-5" />
