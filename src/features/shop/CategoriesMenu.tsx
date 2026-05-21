@@ -6,6 +6,7 @@ import { motion } from "motion/react";
 import { useOutsideClick } from "../hooks/useOutsideClick";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { useAppSelector } from "../hooks/useAppSelector";
+import { useCallback } from "react";
 
 type CategoriesMenuProps = {
   showCategoriesFinal: boolean;
@@ -15,13 +16,29 @@ function CategoriesMenu({ showCategoriesFinal }: CategoriesMenuProps) {
   const { categories, isLoading } = useCategoriesList();
   const isLargeDesktop = useAppSelector((state) => state.breakpoints.xl2);
   const dispatch = useAppDispatch();
-  const [searchParams, setSearchParams] = useSearchParams();
-  const outsideRef = useOutsideClick<HTMLDivElement>(() => {
+  const [searchParams] = useSearchParams();
+  const handleOutsideClick = useCallback(() => {
     if (!isLargeDesktop) dispatch(toggleCategoriesMenu());
-  });
+  }, [isLargeDesktop, dispatch]);
+  const navigate = useNavigate();
+
+  const outsideRef = useOutsideClick<HTMLDivElement>(handleOutsideClick);
   const ref = isLargeDesktop ? null : outsideRef;
 
   const activeCategory = searchParams.get("category");
+
+  const handleSelect = useCallback(
+    (slug: string | null) => {
+      dispatch(setSearchQuery(""));
+      const params = new URLSearchParams();
+      if (slug) {
+        params.set("category", slug);
+        params.set("page", "1");
+      }
+      navigate({ pathname: "/", search: params.toString() });
+    },
+    [dispatch, navigate],
+  );
 
   return (
     <>
@@ -45,10 +62,19 @@ function CategoriesMenu({ showCategoriesFinal }: CategoriesMenuProps) {
             </div>
 
             <ul className="flex flex-col gap-0.5 p-2 overflow-y-auto">
-              <CategoryItem category={{ name: "All products", slug: null }} />
+              <CategoryItem
+                category={{ name: "All products", slug: null }}
+                isActive={activeCategory === null}
+                onSelect={handleSelect}
+              />
 
               {categories?.map((category) => (
-                <CategoryItem category={category} key={category.slug} />
+                <CategoryItem
+                  category={category}
+                  isActive={category.slug === activeCategory}
+                  onSelect={handleSelect}
+                  key={category.slug}
+                />
               ))}
             </ul>
           </>

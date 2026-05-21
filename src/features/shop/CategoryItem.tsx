@@ -1,42 +1,16 @@
-import { useNavigate, useSearchParams } from "react-router";
-import { setSearchQuery } from "../../redux/shopSlice";
-import { Category } from "../../services/apiDummyShop";
-import { useAppDispatch } from "../hooks/useAppDispatch";
-
 type CategoryItemProps = {
-  category: Category;
+  category: { name: string; slug: string | null };
+  isActive: boolean;
+  onSelect: (slug: string | null) => void;
 };
 
-function CategoryItem({ category }: CategoryItemProps) {
-  const navigate = useNavigate();
-  const dispatch = useAppDispatch();
-
+function CategoryItem({ category, onSelect, isActive }: CategoryItemProps) {
   const { name, slug } = category;
-  const [searchParams, setSearchParams] = useSearchParams();
-
-  const isActive = searchParams.get("category") === slug;
-
-  function handleSetCategory() {
-    if (!slug) {
-      searchParams.delete("category");
-      setSearchParams(searchParams);
-      dispatch(setSearchQuery(""));
-      navigate("/");
-      return;
-    }
-
-    searchParams.set("category", slug);
-    searchParams.set("page", "1");
-    setSearchParams(searchParams);
-    dispatch(setSearchQuery(""));
-
-    navigate(`/?${searchParams.toString()}`);
-  }
 
   return (
     <li>
       <button
-        onClick={handleSetCategory}
+        onClick={() => onSelect(slug)}
         className={[
           "cursor-pointer w-full text-left text-sm px-3 py-2 rounded-md transition-colors duration-150",
           isActive
