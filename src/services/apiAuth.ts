@@ -141,10 +141,12 @@ export async function getCurrentUser(): Promise<CurrentUser | null> {
   if (!res.ok) {
     const err = await res.json().catch(() => null);
     localStorage.removeItem("accessToken");
+    localStorage.removeItem("refreshToken");
     throw new Error(err?.message || "Failed to fetch user");
   }
 
   const data: CurrentUser = await res.json();
+  console.log(data);
 
   return data;
 }
