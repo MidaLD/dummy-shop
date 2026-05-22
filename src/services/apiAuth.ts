@@ -146,7 +146,6 @@ export async function getCurrentUser(): Promise<CurrentUser | null> {
   }
 
   const data: CurrentUser = await res.json();
-  console.log(data);
 
   return data;
 }

@@ -21,6 +21,7 @@ function UserMenu() {
     : "";
 
   function handleToggleUserMenu() {
+    import("../../pages/UserProfilePage");
     setUserMenuOpen((prev) => !prev);
   }
 
