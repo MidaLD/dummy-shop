@@ -1,4 +1,4 @@
-import { BrowserRouter, Route, Routes } from "react-router-dom";
+import { BrowserRouter, Route, Routes } from "react-router";
 import { lazy, Suspense } from "react";
 import AppLayout from "./ui/AppLayout";
 import CartPage from "./pages/CartPage";
