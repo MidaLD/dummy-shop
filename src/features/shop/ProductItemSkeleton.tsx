@@ -1,9 +1,11 @@
 function ProductItemSkeleton({ className }: { className?: string }) {
   return (
-    <div className={`flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm${className ? ` ${className}` : ""}`}>
+    <div
+      className={`flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm${className ? ` ${className}` : ""}`}
+    >
       <div className="aspect-square animate-pulse bg-slate-200" />
 
-      <div className="flex flex-1 flex-col gap-1 px-4 pb-2 pt-3">
+      <div className="flex flex-1 flex-col gap-2 px-4 pb-2 pt-3">
         <div className="h-4 w-16 animate-pulse rounded bg-slate-200" />
         <div className="h-10 w-full animate-pulse rounded bg-slate-200" />
         <div className="mt-auto flex items-center gap-2 pt-1">

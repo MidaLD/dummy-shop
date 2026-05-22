@@ -21,8 +21,7 @@ const CategoryItem = memo(function ({
           isActive
             ? "bg-slate-100 text-slate-900 font-semibold"
             : "text-slate-600 hover:bg-slate-50 hover:text-slate-900"
-        } 
-            `}
+        }`}
       >
         {name}
       </button>

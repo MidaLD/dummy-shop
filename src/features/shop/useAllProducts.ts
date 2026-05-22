@@ -1,4 +1,8 @@
-import { useQuery, useQueryClient } from "@tanstack/react-query";
+import {
+  keepPreviousData,
+  useQuery,
+  useQueryClient,
+} from "@tanstack/react-query";
 import {
   getAllProducts,
   GetAllProductsParams,
@@ -21,6 +25,7 @@ export function useAllProducts({
     queryKey: ["products", category, page, limit],
     queryFn: () => getAllProducts({ category, page, limit }),
     enabled,
+    placeholderData: keepPreviousData,
   });
 
   const pageCount = Math.ceil((data?.total ?? 0) / limit);

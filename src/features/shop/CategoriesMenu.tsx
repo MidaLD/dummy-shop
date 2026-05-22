@@ -102,7 +102,7 @@ const ITEM_WIDTHS = [
 function CategoriesMenuSkeleton() {
   return (
     <>
-      <div className="px-4 py-4 border-b border-slate-100">
+      <div className="px-5 py-5 border-b border-slate-100">
         <div className="h-4 w-20 animate-pulse rounded bg-slate-200" />
       </div>
 
