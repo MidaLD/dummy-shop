@@ -18,9 +18,9 @@ function AppLayout() {
 
   const dispatch = useAppDispatch();
 
-  const { currentUser, isLoading: isUserLoading } = useCurrentUser();
+  const { currentUser } = useCurrentUser();
 
-  const { userCart, isLoading, isSuccess } = useUserCart(currentUser?.id);
+  const { userCart, isSuccess } = useUserCart(currentUser?.id);
 
   useEffect(() => {
     if (!isSuccess || !userCart) return;

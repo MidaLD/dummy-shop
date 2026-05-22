@@ -188,7 +188,7 @@ export async function getUserCart(id: number): Promise<Cart> {
   const rawCart = data.carts[0];
 
   const products: CartProduct[] = rawCart.products.map(
-    ({ total, discountedTotal, ...rest }) => rest,
+    ({ total: _total, discountedTotal: _discountedTotal, ...rest }) => rest,
   );
 
   return {

@@ -1,4 +1,6 @@
+import dayjs from "dayjs";
 import RatingStars from "../../ui/RatingStars";
+import { memo } from "react";
 
 type Review = {
   comment: string;
@@ -12,14 +14,10 @@ type ReviewParams = {
   review: Review;
 };
 
-function Review({ review }: ReviewParams) {
+const Review = memo(function Review({ review }: ReviewParams) {
   const { rating, comment, date, reviewerName } = review;
 
-  const formattedDate = new Date(date).toLocaleDateString(undefined, {
-    year: "numeric",
-    month: "short",
-    day: "numeric",
-  });
+  const formattedDate = dayjs(date).format("MMM D, YYYY");
 
   const initials = reviewerName
     .split(" ")
@@ -48,6 +46,6 @@ function Review({ review }: ReviewParams) {
       <p className="text-sm leading-relaxed text-slate-600">{comment}</p>
     </div>
   );
-}
+});
 
 export default Review;

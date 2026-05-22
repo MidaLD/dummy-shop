@@ -18,17 +18,20 @@ function ProductGalleryModal({
   const [imgLoaded, setImgLoaded] = useState(false);
   const ref = useOutsideClick<HTMLDivElement>(handleCloseGallery);
   const numImages = images.length;
+  const hasMultipleImages = numImages > 1;
 
   function handleSelectImage(index: number) {
     setMainImageIndex(index);
   }
 
   function handlePrevImage() {
+    if (!hasMultipleImages) return;
     if (mainImageIndex <= 0) setMainImageIndex(numImages - 1);
     else setMainImageIndex((prev) => prev - 1);
   }
 
   function handleNextImage() {
+    if (!hasMultipleImages) return;
     if (mainImageIndex >= numImages - 1) setMainImageIndex(0);
     else setMainImageIndex((prev) => prev + 1);
   }
@@ -52,7 +55,7 @@ function ProductGalleryModal({
           </button>
 
           <div className="relative aspect-square w-full overflow-hidden bg-slate-50">
-            {numImages > 1 && (
+            {hasMultipleImages && (
               <>
                 <button
                   onClick={handlePrevImage}
@@ -92,17 +95,23 @@ function ProductGalleryModal({
                 </svg>
               </div>
             )}
-            <img
-              className={`h-full w-full object-contain transition-opacity duration-200 ${
-                imgLoaded ? "opacity-100" : "opacity-0"
-              }`}
-              src={images[mainImageIndex]}
-              onLoad={() => setImgLoaded(true)}
+            <button
               onClick={handleNextImage}
-            />
+              className={
+                hasMultipleImages ? "cursor-pointer" : "cursor-default"
+              }
+            >
+              <img
+                className={`h-full w-full object-contain transition-opacity duration-200 ${
+                  imgLoaded ? "opacity-100" : "opacity-0"
+                }`}
+                src={images[mainImageIndex]}
+                onLoad={() => setImgLoaded(true)}
+              />
+            </button>
           </div>
 
-          {numImages > 1 && (
+          {hasMultipleImages && (
             <div className="flex gap-2 overflow-x-auto border-t border-slate-100 p-3">
               {images.map((image, i) => (
                 <ProductGalleryImage

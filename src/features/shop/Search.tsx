@@ -25,23 +25,28 @@ function Search() {
   const location = useLocation();
   const navigate = useNavigate();
 
+  const pageRef = useRef(page);
+  pageRef.current = page;
+  const pathnameRef = useRef(location.pathname);
+  pathnameRef.current = location.pathname;
+
   useEffect(() => {
     if (inputValue === searchQuery) return;
 
     setIsDebouncing(true);
     const timer = setTimeout(() => {
-      if (page !== "1") {
+      if (pageRef.current !== "1") {
         searchParams.set("page", "1");
         setSearchParams(searchParams);
       }
-      if (location.pathname !== "/") navigate("/");
+      if (pathnameRef.current !== "/") navigate("/");
       queryClient.cancelQueries({ queryKey: ["search"] });
       dispatch(setSearchQuery(inputValue));
       setIsDebouncing(false);
     }, 400);
 
     return () => clearTimeout(timer);
-  }, [inputValue]);
+  }, [inputValue]); // eslint-disable-line react-hooks/exhaustive-deps
 
   function handleOnChange(e: ChangeEvent<HTMLInputElement>) {
     setInputValue(e.target.value);

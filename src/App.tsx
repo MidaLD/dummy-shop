@@ -12,6 +12,7 @@ const UserProfilePage = lazy(() => import("./pages/UserProfilePage"));
 const LoginFormPage = lazy(() => import("./pages/LoginFormPage"));
 import ShopPage from "./pages/ShopPage";
 import BreakpointInitializer from "./ui/BreakpointInitializer";
+import SpinnerFullPage from "./ui/SpinnerFullPage";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -28,7 +29,7 @@ function App() {
       <BreakpointInitializer />
       <ReactQueryDevtools initialIsOpen={false} />
       <BrowserRouter>
-        <Suspense>
+        <Suspense fallback={<SpinnerFullPage />}>
           <Routes>
             <Route path="/login" element={<LoginFormPage />} />
             <Route element={<AppLayout />}>

@@ -2,7 +2,7 @@ import CategoryItem from "./CategoryItem";
 import { useCategoriesList } from "./useCategoriesList";
 import { setSearchQuery, toggleCategoriesMenu } from "../../redux/shopSlice";
 import { useNavigate, useSearchParams } from "react-router";
-import { motion } from "motion/react";
+import { AnimatePresence, motion } from "motion/react";
 import { useOutsideClick } from "../hooks/useOutsideClick";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { useAppSelector } from "../hooks/useAppSelector";
@@ -48,34 +48,49 @@ function CategoriesMenu() {
       ref={ref}
       className="flex overflow-y-auto bg-white flex-col xl2:shrink-0 xl2:border-r xl2:border-slate-100 absolute xl2:relative inset-y-0 left-0 shadow-2xl z-20 w-64 "
     >
-      {isLoading ? (
-        <CategoriesMenuSkeleton />
-      ) : (
-        <>
-          <div className="px-4 py-4 border-b border-slate-100">
-            <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-              Categories
-            </span>
-          </div>
+      <AnimatePresence mode="wait">
+        {isLoading ? (
+          <motion.div
+            key="skeleton"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            exit={{ opacity: 0 }}
+            transition={{ duration: 0.15 }}
+          >
+            <CategoriesMenuSkeleton />
+          </motion.div>
+        ) : (
+          <motion.div
+            key="content"
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ duration: 0.2 }}
+          >
+            <div className="px-4 py-4 border-b border-slate-100">
+              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                Categories
+              </span>
+            </div>
 
-          <ul className="flex flex-col gap-0.5 p-2 overflow-y-auto">
-            <CategoryItem
-              category={ALL_PRODUCTS_CATEGORY}
-              isActive={activeCategory === null}
-              onSelect={handleSelect}
-            />
-
-            {categories?.map((category) => (
+            <ul className="flex flex-col gap-0.5 p-2 overflow-y-auto">
               <CategoryItem
-                category={category}
-                isActive={category.slug === activeCategory}
+                category={ALL_PRODUCTS_CATEGORY}
+                isActive={activeCategory === null}
                 onSelect={handleSelect}
-                key={category.slug}
               />
-            ))}
-          </ul>
-        </>
-      )}
+
+              {categories?.map((category) => (
+                <CategoryItem
+                  category={category}
+                  isActive={category.slug === activeCategory}
+                  onSelect={handleSelect}
+                  key={category.slug}
+                />
+              ))}
+            </ul>
+          </motion.div>
+        )}
+      </AnimatePresence>
     </motion.div>
   );
 }
@@ -87,6 +102,13 @@ const ITEM_WIDTHS = [
   "w-5/6",
   "w-1/2",
   "w-4/5",
+  "w-3/4",
+  "w-2/3",
+  "w-5/6",
+  "w-1/2",
+  "w-4/5",
+  "w-3/4",
+  "w-2/3",
   "w-3/4",
   "w-2/3",
   "w-5/6",

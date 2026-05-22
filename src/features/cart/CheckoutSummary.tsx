@@ -2,13 +2,13 @@ import { useState } from "react";
 import toast from "react-hot-toast";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import { useAppSelector } from "../hooks/useAppSelector";
-import { clearCart, setCartId } from "../../redux/cartSlice";
+import { clearCart } from "../../redux/cartSlice";
 import { useNavigate } from "react-router";
 import Button from "../../ui/Button";
 import { selectTotalQuantity } from "../../redux/selectors/cartSelectors";
 import SummaryRow from "./SummaryRow";
 
-function formatPrice(num: number) {
+function formatCurrency(num: number) {
   return `$ ${num.toFixed(2)}`;
 }
 
@@ -49,7 +49,7 @@ function CheckoutSummary({ discountedTotal }: CheckoutSummaryProps) {
 
       <SummaryRow
         label={`Items (${totalQuantity})`}
-        value={formatPrice(discountedTotal)}
+        value={formatCurrency(discountedTotal)}
       />
 
       <div className="flex flex-col gap-1.5">
@@ -84,7 +84,7 @@ function CheckoutSummary({ discountedTotal }: CheckoutSummaryProps) {
 
       <div className="border-t border-slate-200" />
 
-      <SummaryRow label="Total" value={formatPrice(totalPrice)} total />
+      <SummaryRow label="Total" value={formatCurrency(totalPrice)} total />
 
       <Button
         disabled={totalQuantity === 0}

@@ -1,10 +1,9 @@
-import { motion } from "motion/react";
 import { Link } from "react-router";
 import { addToCart } from "../../redux/cartSlice";
 import { useQueryClient } from "@tanstack/react-query";
 import { getProduct } from "../../services/apiDummyShop";
 import { getDiscountedPrice, formatPrice } from "../../utils/helpers";
-import { memo, useState } from "react";
+import { memo, useCallback, useState } from "react";
 
 import toast from "react-hot-toast";
 import Button from "../../ui/Button";
@@ -24,7 +23,7 @@ const ProductItem = memo(function ({ product }: ProductItemProps) {
 
   const discountedPrice = getDiscountedPrice(price, discountPercentage);
 
-  function handleAddToCart() {
+  const handleAddToCart = useCallback(() => {
     const productObj = {
       id: product.id,
       title: product.title,
@@ -43,14 +42,14 @@ const ProductItem = memo(function ({ product }: ProductItemProps) {
         icon: "🛒",
       },
     );
-  }
+  }, [product, dispatch, title]);
 
-  function handleMouseEnter() {
+  const handleMouseEnter = useCallback(() => {
     queryClient.prefetchQuery({
       queryKey: ["item", id],
       queryFn: () => getProduct(id),
     });
-  }
+  }, [id, queryClient]);
 
   return (
     <div className="group flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm transition-shadow duration-200 hover:shadow-md">

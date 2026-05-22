@@ -5,7 +5,7 @@ type BreakpointState = {
 };
 
 const initialState: BreakpointState = {
-  xl2: window.matchMedia("(min-width: 1440px)").matches,
+  xl2: false,
 };
 
 const breakpointSlice = createSlice({

@@ -1,5 +1,4 @@
 import ProductItem from "../features/shop/ProductItem";
-import ProductItemSkeleton from "../features/shop/ProductItemSkeleton";
 import { useAllProducts } from "../features/shop/useAllProducts";
 import { useSearchProducts } from "../features/shop/useSearchProducts";
 import { useSearchParams } from "react-router";
@@ -63,7 +62,10 @@ function ShopPage() {
               <ProductItem product={product} key={product.id} />
             ))}
             {Array.from({ length: placeholderCount }).map((_, i) => (
-              <div key={`placeholder-${i}`} className="invisible">
+              <div
+                key={`placeholder-${i}`}
+                className="invisible **:animate-none"
+              >
                 <ProductItemSkeleton />
               </div>
             ))}
@@ -80,3 +82,28 @@ function ShopPage() {
 }
 
 export default ShopPage;
+
+function ProductItemSkeleton({ className }: { className?: string }) {
+  return (
+    <div
+      className={`flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm${className ? ` ${className}` : ""}`}
+    >
+      <div className="aspect-square animate-pulse bg-slate-200" />
+
+      <div className="flex flex-1 flex-col gap-2 px-4 pb-2 pt-3">
+        <div className="h-4 w-16 animate-pulse rounded bg-slate-200" />
+        <div className="h-10 w-full animate-pulse rounded bg-slate-200" />
+        <div className="mt-auto flex items-center gap-2 pt-1">
+          <div className="h-5 w-14 animate-pulse rounded bg-slate-200" />
+          <div className="h-3 w-10 animate-pulse rounded bg-slate-200" />
+          <div className="h-4 w-10 animate-pulse rounded bg-slate-200" />
+        </div>
+        <div className="h-3 w-12 animate-pulse rounded bg-slate-200" />
+      </div>
+
+      <div className="px-4 pb-4 pt-1">
+        <div className="h-10 w-full animate-pulse rounded-xl bg-slate-200" />
+      </div>
+    </div>
+  );
+}

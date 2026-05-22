@@ -9,6 +9,9 @@ function BreakpointInitializer() {
   useEffect(() => {
     const mql = window.matchMedia("(min-width: 1440px)");
 
+    dispatch(setIsLargeDesktop(mql.matches));
+    if (mql.matches) dispatch(hideCategoriesMenu());
+
     const handler = (e: MediaQueryListEvent) => {
       dispatch(setIsLargeDesktop(e.matches));
       if (e.matches) dispatch(hideCategoriesMenu());
