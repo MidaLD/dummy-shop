@@ -6,7 +6,7 @@ type CategoryItemProps = {
   onSelect: (slug: string | null) => void;
 };
 
-const CategoryItem = memo(function ({
+const CategoryItem = memo(function CategoryItem({
   category,
   onSelect,
   isActive,

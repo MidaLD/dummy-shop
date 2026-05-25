@@ -10,7 +10,7 @@ import { useAppDispatch } from "../hooks/useAppDispatch";
 function CartItems() {
   const totalQuantity = useAppSelector(selectTotalQuantity);
   const dispatch = useAppDispatch();
-  const products = useAppSelector((store) => store.cart.products);
+  const products = useAppSelector((state) => state.cart.products);
 
   function handleClearCart() {
     dispatch(clearCart());

@@ -1,15 +1,18 @@
-import {
-  FaGithub,
-  FaInstagram,
-  FaFacebook,
-} from "react-icons/fa";
+import { memo } from "react";
+import { FaGithub, FaInstagram, FaFacebook } from "react-icons/fa";
 import { FaXTwitter } from "react-icons/fa6";
 import Logo from "./Logo";
 
 const footerLinks = [
   {
     heading: "Shop",
-    links: ["New Arrivals", "Best Sellers", "Sale", "Gift Cards", "All Products"],
+    links: [
+      "New Arrivals",
+      "Best Sellers",
+      "Sale",
+      "Gift Cards",
+      "All Products",
+    ],
   },
   {
     heading: "Company",
@@ -17,11 +20,22 @@ const footerLinks = [
   },
   {
     heading: "Support",
-    links: ["FAQ", "Shipping & Returns", "Track Order", "Contact Us", "Size Guide"],
+    links: [
+      "FAQ",
+      "Shipping & Returns",
+      "Track Order",
+      "Contact Us",
+      "Size Guide",
+    ],
   },
   {
     heading: "Legal",
-    links: ["Privacy Policy", "Terms of Service", "Cookie Policy", "Accessibility"],
+    links: [
+      "Privacy Policy",
+      "Terms of Service",
+      "Cookie Policy",
+      "Accessibility",
+    ],
   },
 ];
 
@@ -80,15 +94,17 @@ function Footer() {
         <div className="flex flex-col sm:flex-row items-center justify-between gap-3 pt-6 text-xs text-slate-500">
           <span>© 2026 Dummy Shop. All rights reserved.</span>
           <div className="flex items-center gap-4">
-            {["Privacy Policy", "Terms of Service", "Cookie Settings"].map((item) => (
-              <a
-                key={item}
-                href="#"
-                className="hover:text-slate-300 transition-colors"
-              >
-                {item}
-              </a>
-            ))}
+            {["Privacy Policy", "Terms of Service", "Cookie Settings"].map(
+              (item) => (
+                <a
+                  key={item}
+                  href="#"
+                  className="hover:text-slate-300 transition-colors"
+                >
+                  {item}
+                </a>
+              ),
+            )}
           </div>
         </div>
       </div>
@@ -96,4 +112,4 @@ function Footer() {
   );
 }
 
-export default Footer;
+export default memo(Footer);

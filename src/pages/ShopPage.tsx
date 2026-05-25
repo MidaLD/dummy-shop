@@ -10,7 +10,7 @@ function ShopPage() {
 
   const category = searchParams.get("category");
   const page = Number(searchParams.get("page")) || 1;
-  const query = useAppSelector((store) => store.shop.searchQuery);
+  const query = useAppSelector((state) => state.shop.searchQuery);
 
   const limit = 12;
 

@@ -91,7 +91,7 @@ type Crypto = {
   network: string;
 };
 
-type CurrentUser = {
+export type CurrentUser = {
   id: number;
   firstName: string;
   lastName: string;

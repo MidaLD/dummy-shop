@@ -11,7 +11,7 @@ import { useOutsideClick } from "../hooks/useOutsideClick";
 function Search() {
   const [searchParams, setSearchParams] = useSearchParams();
   const page = searchParams.get("page");
-  const searchQuery = useAppSelector((store) => store.shop.searchQuery);
+  const searchQuery = useAppSelector((state) => state.shop.searchQuery);
   const [isSearchOpen, setIsSearchOpen] = useState(false);
   const [inputValue, setInputValue] = useState(searchQuery);
   const [isDebouncing, setIsDebouncing] = useState(false);

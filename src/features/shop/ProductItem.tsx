@@ -14,7 +14,7 @@ type ProductItemProps = {
   product: Product;
 };
 
-const ProductItem = memo(function ({ product }: ProductItemProps) {
+const ProductItem = memo(function ProductItem({ product }: ProductItemProps) {
   const [imgLoaded, setImgLoaded] = useState(false);
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
