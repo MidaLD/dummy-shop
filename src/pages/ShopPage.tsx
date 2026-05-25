@@ -7,9 +7,9 @@ import { useAppSelector } from "../features/hooks/useAppSelector";
 
 function ShopPage() {
   const [searchParams] = useSearchParams();
-
   const category = searchParams.get("category");
   const page = Number(searchParams.get("page")) || 1;
+
   const query = useAppSelector((state) => state.shop.searchQuery);
 
   const limit = 12;

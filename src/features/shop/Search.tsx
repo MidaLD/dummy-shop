@@ -2,7 +2,14 @@ import { setSearchQuery } from "../../redux/shopSlice";
 import { useQueryClient } from "@tanstack/react-query";
 import { useLocation, useNavigate, useSearchParams } from "react-router";
 import { HiMagnifyingGlass, HiOutlineXMark } from "react-icons/hi2";
-import { ChangeEvent, useCallback, useEffect, useRef, useState } from "react";
+import {
+  ChangeEvent,
+  ComponentPropsWithRef,
+  useCallback,
+  useEffect,
+  useRef,
+  useState,
+} from "react";
 import { motion, AnimatePresence } from "motion/react";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useAppDispatch } from "../hooks/useAppDispatch";
@@ -89,16 +96,12 @@ function Search() {
             ) : (
               <HiMagnifyingGlass className="w-5 h-5 shrink-0 text-slate-300" />
             )}
-            <input
+            <SearchInput
               ref={inputRef}
-              onFocus={handleClearSearchQuery}
-              onChange={handleOnChange}
-              className="flex-1 bg-transparent text-sm text-white placeholder:text-slate-400 focus:outline-none"
-              name="search"
-              type="text"
-              placeholder="Search products..."
-              autoComplete="off"
               value={inputValue}
+              onChange={handleOnChange}
+              onFocus={handleClearSearchQuery}
+              className="flex-1 bg-transparent text-sm text-white placeholder:text-slate-400 focus:outline-none"
             />
             {searchQuery && (
               <button
@@ -124,15 +127,11 @@ function Search() {
         ) : (
           <HiMagnifyingGlass className="pointer-events-none absolute left-3 w-4 h-4 text-slate-400" />
         )}
-        <input
-          onFocus={handleClearSearchQuery}
-          onChange={handleOnChange}
-          className="w-52 rounded-lg border border-white/20 bg-white/10 py-2 pl-9 pr-9 text-sm text-white placeholder:text-slate-400 transition-colors focus:border-white/40 focus:bg-white/15 focus:outline-none"
-          name="search"
-          type="text"
-          placeholder="Search products..."
-          autoComplete="off"
+        <SearchInput
           value={inputValue}
+          onChange={handleOnChange}
+          onFocus={handleClearSearchQuery}
+          className="w-52 rounded-lg border border-white/20 bg-white/10 py-2 pl-9 pr-9 text-sm text-white placeholder:text-slate-400 transition-colors focus:border-white/40 focus:bg-white/15 focus:outline-none"
         />
         {searchQuery && (
           <button
@@ -148,3 +147,17 @@ function Search() {
 }
 
 export default Search;
+
+type SearchInputProps = ComponentPropsWithRef<"input">;
+
+function SearchInput(props: SearchInputProps) {
+  return (
+    <input
+      {...props}
+      name="search"
+      type="text"
+      placeholder="Search products..."
+      autoComplete="off"
+    />
+  );
+}
