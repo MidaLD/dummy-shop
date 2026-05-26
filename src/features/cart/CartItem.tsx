@@ -142,8 +142,8 @@ function CartItem({ product }: CartItemProps) {
 
       {showConfirm && (
         <ConfirmDialog
-          title="Remove item?"
-          message={`${quantity} x ${title}`}
+          title="Remove item"
+          message={quantity > 1 ? `${quantity} x ${title}` : title}
           confirmLabel="Remove"
           onConfirm={handleRemoveCartItem}
           onClose={() => setShowConfirm(false)}
