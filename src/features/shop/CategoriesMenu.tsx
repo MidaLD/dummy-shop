@@ -39,59 +39,61 @@ function CategoriesMenu() {
   );
 
   return (
-    <motion.div
-      initial={isLargeDesktop ? false : { x: "-100%" }}
-      animate={{ x: 0 }}
-      exit={isLargeDesktop ? {} : { x: "-100%" }}
-      transition={{ duration: 0.2, type: "tween" }}
-      key="categories-menu"
-      ref={ref}
-      className="flex overflow-y-auto bg-white flex-col xl2:shrink-0 xl2:border-r xl2:border-slate-100 absolute xl2:relative inset-y-0 left-0 shadow-2xl z-20 w-64 "
-    >
-      <AnimatePresence mode="wait">
-        {isLoading ? (
-          <motion.div
-            key="skeleton"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            transition={{ duration: 0.15 }}
-          >
-            <CategoriesMenuSkeleton />
-          </motion.div>
-        ) : (
-          <motion.div
-            key="content"
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            transition={{ duration: 0.2 }}
-          >
-            <div className="px-4 py-4 border-b border-slate-100">
-              <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
-                Categories
-              </span>
-            </div>
+    <div className="sticky h-screen bottom-0 top-0 z-20">
+      <motion.div
+        initial={isLargeDesktop ? false : { x: "-100%" }}
+        animate={{ x: 0 }}
+        exit={isLargeDesktop ? {} : { x: "-100%" }}
+        transition={{ duration: 0.2, type: "tween" }}
+        key="categories-menu"
+        ref={ref}
+        className="flex overflow-y-auto bg-white flex-col h-full  xl2:shrink-0 xl2:border-r xl2:border-slate-100 absolute xl2:relative inset-y-0 left-0 shadow-2xl z-20 w-64 "
+      >
+        <AnimatePresence mode="wait">
+          {isLoading ? (
+            <motion.div
+              key="skeleton"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              exit={{ opacity: 0 }}
+              transition={{ duration: 0.15 }}
+            >
+              <CategoriesMenuSkeleton />
+            </motion.div>
+          ) : (
+            <motion.div
+              key="content"
+              initial={{ opacity: 0 }}
+              animate={{ opacity: 1 }}
+              transition={{ duration: 0.2 }}
+            >
+              <div className="px-4 py-4 border-b border-slate-100">
+                <span className="text-xs font-semibold text-slate-400 uppercase tracking-wider">
+                  Categories
+                </span>
+              </div>
 
-            <ul className="flex flex-col gap-0.5 p-2 overflow-y-auto">
-              <CategoryItem
-                category={ALL_PRODUCTS_CATEGORY}
-                isActive={activeCategory === null}
-                onSelect={handleSelect}
-              />
-
-              {categories?.map((category) => (
+              <ul className="flex flex-col gap-0.5 p-2 overflow-y-auto">
                 <CategoryItem
-                  category={category}
-                  isActive={category.slug === activeCategory}
+                  category={ALL_PRODUCTS_CATEGORY}
+                  isActive={activeCategory === null}
                   onSelect={handleSelect}
-                  key={category.slug}
                 />
-              ))}
-            </ul>
-          </motion.div>
-        )}
-      </AnimatePresence>
-    </motion.div>
+
+                {categories?.map((category) => (
+                  <CategoryItem
+                    category={category}
+                    isActive={category.slug === activeCategory}
+                    onSelect={handleSelect}
+                    key={category.slug}
+                  />
+                ))}
+              </ul>
+            </motion.div>
+          )}
+        </AnimatePresence>
+      </motion.div>
+    </div>
   );
 }
 
