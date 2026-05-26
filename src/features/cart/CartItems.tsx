@@ -6,8 +6,11 @@ import { HiArrowLongLeft } from "react-icons/hi2";
 import { selectTotalQuantity } from "../../redux/selectors/cartSelectors";
 import { useAppSelector } from "../hooks/useAppSelector";
 import { useAppDispatch } from "../hooks/useAppDispatch";
+import { useState } from "react";
+import ConfirmDialog from "../../ui/ConfirmDialog";
 
 function CartItems() {
+  const [showConfirm, setShowConfirm] = useState(false);
   const totalQuantity = useAppSelector(selectTotalQuantity);
   const dispatch = useAppDispatch();
   const products = useAppSelector((state) => state.cart.products);
@@ -39,12 +42,21 @@ function CartItems() {
           Back to shop
         </Link>
         <button
-          onClick={handleClearCart}
+          onClick={() => setShowConfirm(true)}
           className="cursor-pointer text-sm text-slate-400 transition-colors hover:text-red-500"
         >
           Clear cart
         </button>
       </div>
+
+      {showConfirm && (
+        <ConfirmDialog
+          title="Clear cart?"
+          confirmLabel="Clear"
+          onConfirm={handleClearCart}
+          onClose={() => setShowConfirm(false)}
+        />
+      )}
     </div>
   );
 }

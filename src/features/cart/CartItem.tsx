@@ -6,6 +6,7 @@ import { useState } from "react";
 
 import { CartProduct } from "../../services/apiDummyShop";
 import { useAppDispatch } from "../hooks/useAppDispatch";
+import ConfirmDialog from "../../ui/ConfirmDialog";
 
 type CartItemProps = {
   product: CartProduct;
@@ -13,6 +14,7 @@ type CartItemProps = {
 
 function CartItem({ product }: CartItemProps) {
   const [imgLoaded, setImgLoaded] = useState(false);
+  const [showConfirm, setShowConfirm] = useState(false);
   const dispatch = useAppDispatch();
   const { thumbnail, title, discountPercentage, quantity, id, price } = product;
 
@@ -131,12 +133,22 @@ function CartItem({ product }: CartItemProps) {
         </p>
 
         <button
-          onClick={handleRemoveCartItem}
+          onClick={() => setShowConfirm(true)}
           className="flex h-7 w-7 cursor-pointer items-center justify-center rounded-full text-slate-300 transition-colors hover:bg-red-50 hover:text-red-400 sm:ml-4"
         >
           <HiMiniXMark className="h-4 w-4" />
         </button>
       </div>
+
+      {showConfirm && (
+        <ConfirmDialog
+          title="Remove item?"
+          message={`${quantity} x ${title}`}
+          confirmLabel="Remove"
+          onConfirm={handleRemoveCartItem}
+          onClose={() => setShowConfirm(false)}
+        />
+      )}
     </div>
   );
 }

@@ -71,7 +71,7 @@ function ShopPage() {
             ))}
           </>
         ) : (
-          <p className="col-span-full py-10 text-center text-sm text-slate-400">
+          <p className="col-span-full min-h-screen py-10 text-center text-sm text-slate-400">
             No products match your search.
           </p>
         )}

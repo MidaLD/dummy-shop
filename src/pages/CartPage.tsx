@@ -12,7 +12,7 @@ function CartPage() {
 
   if (totalQuantity <= 0)
     return (
-      <div className="flex min-h-[60vh] items-center justify-center">
+      <div className="flex min-h-screen items-center justify-center">
         <p className="text-sm text-slate-500">Your cart is empty.</p>
       </div>
     );
