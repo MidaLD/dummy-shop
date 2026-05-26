@@ -10,11 +10,11 @@ import Button from "../../ui/Button";
 import { type Product } from "../../services/apiDummyShop";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 
-type ProductItemProps = {
+type ProductCardProps = {
   product: Product;
 };
 
-const ProductItem = memo(function ProductItem({ product }: ProductItemProps) {
+const ProductCard = memo(function ProductCard({ product }: ProductCardProps) {
   const [imgLoaded, setImgLoaded] = useState(false);
   const dispatch = useAppDispatch();
   const queryClient = useQueryClient();
@@ -60,7 +60,7 @@ const ProductItem = memo(function ProductItem({ product }: ProductItemProps) {
       >
         <div className="relative aspect-square overflow-hidden bg-slate-50">
           <img
-            className={`h-full w-full object-cover transition-opacity duration-500 
+            className={`h-full w-full object-cover transition-opacity duration-500
   group-hover:scale-105 ${imgLoaded ? "opacity-100" : "opacity-0"}`}
             src={thumbnail}
             alt={title}
@@ -109,4 +109,4 @@ const ProductItem = memo(function ProductItem({ product }: ProductItemProps) {
   );
 });
 
-export default ProductItem;
+export default ProductCard;

@@ -1,4 +1,4 @@
-import ProductItem from "../features/shop/ProductItem";
+import ProductCard from "../features/shop/ProductCard";
 import { useAllProducts } from "../features/shop/useAllProducts";
 import { useSearchProducts } from "../features/shop/useSearchProducts";
 import { useSearchParams } from "react-router";
@@ -31,7 +31,7 @@ function ShopPage() {
       <div className="px-4 py-6 sm:px-6">
         <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
           {Array.from({ length: limit }).map((_, i) => (
-            <ProductItemSkeleton key={i} />
+            <ProductCardSkeleton key={i} />
           ))}
         </div>
       </div>
@@ -59,14 +59,14 @@ function ShopPage() {
         {products.length > 0 ? (
           <>
             {products.map((product) => (
-              <ProductItem product={product} key={product.id} />
+              <ProductCard product={product} key={product.id} />
             ))}
             {Array.from({ length: placeholderCount }).map((_, i) => (
               <div
                 key={`placeholder-${i}`}
                 className="invisible **:animate-none"
               >
-                <ProductItemSkeleton />
+                <ProductCardSkeleton />
               </div>
             ))}
           </>
@@ -83,7 +83,7 @@ function ShopPage() {
 
 export default ShopPage;
 
-function ProductItemSkeleton({ className }: { className?: string }) {
+function ProductCardSkeleton({ className }: { className?: string }) {
   return (
     <div
       className={`flex flex-col overflow-hidden rounded-2xl border border-slate-100 bg-white shadow-sm${className ? ` ${className}` : ""}`}
