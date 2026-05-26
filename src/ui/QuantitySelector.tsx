@@ -1,42 +1,61 @@
+import { HiOutlineMinus, HiOutlinePlus } from "react-icons/hi2";
+
 type QuantitySelectorProps = {
   quantity: number | "";
-  stock: number;
   onIncrement: () => void;
   onDecrement: () => void;
-  onChange: (e: React.ChangeEvent<HTMLInputElement>) => void;
+  size?: "sm" | "md";
+  stock?: number;
+  onChange?: (e: React.ChangeEvent<HTMLInputElement>) => void;
 };
 
 function QuantitySelector({
   quantity,
-  stock,
   onIncrement,
   onDecrement,
+  size = "md",
+  stock,
   onChange,
 }: QuantitySelectorProps) {
+  const sm = size === "sm";
+
+  const btnClass = sm
+    ? "flex h-8 w-8 cursor-pointer items-center justify-center text-slate-500 transition-colors hover:bg-slate-100 active:bg-slate-200"
+    : "flex h-10 w-10 cursor-pointer items-center justify-center text-slate-600 transition-colors hover:bg-slate-100 active:bg-slate-200";
+
+  const inputClass = sm
+    ? "h-8 w-9 border-x border-slate-200 bg-white text-center text-sm font-medium text-slate-800 focus:outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+    : "h-10 w-14 border-x border-slate-200 bg-white text-center text-sm font-medium text-slate-800 focus:outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none";
+
+  const containerClass = sm
+    ? "flex items-center overflow-hidden rounded-lg border border-slate-200"
+    : "flex items-center overflow-hidden rounded-xl border border-slate-200";
+
   return (
-    <div className="flex items-center overflow-hidden rounded-xl border border-slate-200">
+    <div className={containerClass}>
       <button
-        className="flex h-10 w-10 cursor-pointer items-center justify-center text-slate-600 transition-colors hover:bg-slate-100 active:bg-slate-200"
+        className={btnClass}
         onClick={onDecrement}
         disabled={quantity !== "" && +quantity <= 1}
       >
-        &#8722;
+        <HiOutlineMinus className={sm ? "h-3 w-3" : "h-4 w-4"} />
       </button>
       <input
-        className="h-10 w-14 border-x border-slate-200 bg-white text-center text-sm font-medium text-slate-800 focus:outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
+        className={inputClass}
         type="number"
         name="quantity"
         value={quantity}
         onChange={onChange}
+        readOnly={!onChange}
         min={1}
         max={stock}
       />
       <button
-        className="flex h-10 w-10 cursor-pointer items-center justify-center text-slate-600 transition-colors hover:bg-slate-100 active:bg-slate-200"
+        className={btnClass}
         onClick={onIncrement}
-        disabled={quantity !== "" && +quantity >= stock}
+        disabled={!!stock && quantity !== "" && +quantity >= stock}
       >
-        &#43;
+        <HiOutlinePlus className={sm ? "h-3 w-3" : "h-4 w-4"} />
       </button>
     </div>
   );

@@ -1,5 +1,5 @@
 import { decItemQty, incItemQty, removeCartItem } from "../../redux/cartSlice";
-import { HiMiniXMark, HiOutlineMinus, HiOutlinePlus } from "react-icons/hi2";
+import { HiMiniXMark } from "react-icons/hi2";
 import { Link } from "react-router";
 import toast, { Renderable } from "react-hot-toast";
 import { useState } from "react";
@@ -7,6 +7,7 @@ import { useState } from "react";
 import { CartProduct } from "../../services/apiDummyShop";
 import { useAppDispatch } from "../hooks/useAppDispatch";
 import ConfirmDialog from "../../ui/ConfirmDialog";
+import QuantitySelector from "../../ui/QuantitySelector";
 
 type CartItemProps = {
   product: CartProduct;
@@ -106,27 +107,12 @@ function CartItem({ product }: CartItemProps) {
       </Link>
 
       <div className="flex shrink-0 items-center gap-3">
-        <div className="flex items-center overflow-hidden rounded-lg border border-slate-200">
-          <button
-            onClick={handleDecQty}
-            className="flex h-8 w-8 cursor-pointer items-center justify-center text-slate-500 transition-colors hover:bg-slate-100 active:bg-slate-200"
-          >
-            <HiOutlineMinus className="h-3 w-3" />
-          </button>
-          <input
-            className="h-8 w-9 border-x border-slate-200 bg-white text-center text-sm font-medium text-slate-800 focus:outline-none [appearance:textfield] [&::-webkit-inner-spin-button]:appearance-none [&::-webkit-outer-spin-button]:appearance-none"
-            type="number"
-            name="quantity"
-            value={quantity}
-            readOnly
-          />
-          <button
-            onClick={handleIncQty}
-            className="flex h-8 w-8 cursor-pointer items-center justify-center text-slate-500 transition-colors hover:bg-slate-100 active:bg-slate-200"
-          >
-            <HiOutlinePlus className="h-3 w-3" />
-          </button>
-        </div>
+        <QuantitySelector
+          quantity={quantity}
+          size="sm"
+          onIncrement={handleIncQty}
+          onDecrement={handleDecQty}
+        />
 
         <p className="w-16 text-left text-sm font-semibold text-slate-700 sm:w-20">
           ${discountedTotal}
