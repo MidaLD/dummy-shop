@@ -1,15 +1,17 @@
 type SummaryRowProps = {
   label: string;
   value: string;
-  total?: boolean;
+  variant?: "total";
 };
 
-function SummaryRow({ label, value, total = false }: SummaryRowProps) {
+function SummaryRow({ label, value, variant }: SummaryRowProps) {
+  const isTotal = variant === "total";
+
   return (
     <div className="flex items-center justify-between">
       <p
         className={
-          total
+          isTotal
             ? "text-sm font-semibold text-slate-800"
             : "text-sm text-slate-500"
         }
@@ -18,7 +20,7 @@ function SummaryRow({ label, value, total = false }: SummaryRowProps) {
       </p>
       <p
         className={
-          total
+          isTotal
             ? "text-base font-semibold text-slate-800"
             : "text-sm font-medium text-slate-700"
         }

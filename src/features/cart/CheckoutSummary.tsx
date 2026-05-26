@@ -6,16 +6,29 @@ import { clearCart } from "../../redux/cartSlice";
 import { useNavigate } from "react-router";
 import Button from "../../ui/Button";
 import { selectTotalQuantity } from "../../redux/selectors/cartSelectors";
+import { formatCurrency } from "../../utils/helpers";
 import SummaryRow from "./SummaryRow";
-
-function formatCurrency(num: number) {
-  return `$ ${num.toFixed(2)}`;
-}
 
 const SHIPPING_OPTIONS = [
   { label: "Standard Delivery", price: 5 },
   { label: "Express Delivery", price: 15 },
 ];
+
+type LabeledFieldProps = {
+  label: string;
+  children: React.ReactNode;
+};
+
+function LabeledField({ label, children }: LabeledFieldProps) {
+  return (
+    <div className="flex flex-col gap-1.5">
+      <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
+        {label}
+      </p>
+      {children}
+    </div>
+  );
+}
 
 type CheckoutSummaryProps = {
   discountedTotal: number;
@@ -52,10 +65,7 @@ function CheckoutSummary({ discountedTotal }: CheckoutSummaryProps) {
         value={formatCurrency(discountedTotal)}
       />
 
-      <div className="flex flex-col gap-1.5">
-        <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
-          Shipping
-        </p>
+      <LabeledField label="Shipping">
         <select
           value={shippingPrice}
           onChange={(e) => setShippingPrice(Number(e.target.value))}
@@ -67,12 +77,9 @@ function CheckoutSummary({ discountedTotal }: CheckoutSummaryProps) {
             </option>
           ))}
         </select>
-      </div>
+      </LabeledField>
 
-      <div className="flex flex-col gap-1.5">
-        <p className="text-xs font-medium uppercase tracking-wide text-slate-400">
-          Promo Code
-        </p>
+      <LabeledField label="Promo Code">
         <input
           value={promoCode}
           onChange={(e) => setPromoCode(e.target.value)}
@@ -80,11 +87,15 @@ function CheckoutSummary({ discountedTotal }: CheckoutSummaryProps) {
           type="text"
           placeholder="Enter promo code"
         />
-      </div>
+      </LabeledField>
 
       <div className="border-t border-slate-200" />
 
-      <SummaryRow label="Total" value={formatCurrency(totalPrice)} total />
+      <SummaryRow
+        label="Total"
+        value={formatCurrency(totalPrice)}
+        variant="total"
+      />
 
       <Button
         disabled={totalQuantity === 0}

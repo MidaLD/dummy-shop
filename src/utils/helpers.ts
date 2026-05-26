@@ -6,6 +6,10 @@ export function getDiscountedPrice(price: number, discountPercentage: number) {
   return discountedPrice;
 }
 
+export function formatCurrency(num: number): string {
+  return `$ ${num.toFixed(2)}`;
+}
+
 export function formatPrice(value: number): string {
   if (value >= 1000) {
     return `${+( value / 1000).toFixed(1)}K`;
