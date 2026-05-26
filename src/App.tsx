@@ -13,6 +13,7 @@ const LoginFormPage = lazy(() => import("./pages/LoginFormPage"));
 import ShopPage from "./pages/ShopPage";
 import BreakpointInitializer from "./ui/BreakpointInitializer";
 import SpinnerFullPage from "./ui/SpinnerFullPage";
+import CartProvider from "./features/cart/CartProvider";
 
 const queryClient = new QueryClient({
   defaultOptions: {
@@ -32,7 +33,13 @@ function App() {
         <Suspense fallback={<SpinnerFullPage />}>
           <Routes>
             <Route path="/login" element={<LoginFormPage />} />
-            <Route element={<AppLayout />}>
+            <Route
+              element={
+                <CartProvider>
+                  <AppLayout />
+                </CartProvider>
+              }
+            >
               <Route path="/" element={<ShopPage />} />
               <Route
                 path="/product-details/:productId"
