@@ -12,10 +12,15 @@ export function useProduct(id: number) {
   } = useQuery({
     queryKey: ["item", id],
     queryFn: () => getProduct(id),
-    placeholderData: () =>
-      queryClient
-        .getQueryData<{ products: Product[] }>(["products", null, 1, 12])
-        ?.products.find((p) => p.id === id),
+    placeholderData: () => {
+      const cache = queryClient.getQueriesData<{ products: Product[] }>({
+        queryKey: ["products"],
+      });
+      for (const [, data] of cache) {
+        const found = data?.products.find((p) => p.id === id);
+        if (found) return found;
+      }
+    },
     staleTime: 1000 * 60 * 5,
     retry: false,
   });
