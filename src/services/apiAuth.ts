@@ -50,6 +50,33 @@ export function logout() {
   localStorage.removeItem("refreshToken");
 }
 
+type RefreshResponse = {
+  accessToken: string;
+  refreshToken: string;
+};
+
+export async function refreshSession(): Promise<string> {
+  const refreshToken = localStorage.getItem("refreshToken");
+
+  const res = await fetch(`${API_URL}/auth/refresh`, {
+    method: "POST",
+    headers: { "Content-Type": "application/json" },
+    body: JSON.stringify({ refreshToken, expiresInMins: 30 }),
+    credentials: "include",
+  });
+
+  if (!res.ok) {
+    logout();
+    throw new Error("Session expired. Please log in again.");
+  }
+
+  const data: RefreshResponse = await res.json();
+  localStorage.setItem("accessToken", data.accessToken);
+  localStorage.setItem("refreshToken", data.refreshToken);
+
+  return data.accessToken;
+}
+
 type Hair = {
   color: string;
   type: string;
@@ -126,26 +153,30 @@ export type CurrentUser = {
   role: "admin" | "moderator" | "user";
 };
 
+async function fetchCurrentUser(token: string): Promise<Response> {
+  return fetch(`${API_URL}/auth/me`, {
+    method: "GET",
+    headers: { Authorization: `Bearer ${token}` },
+  });
+}
+
 export async function getCurrentUser(): Promise<CurrentUser | null> {
-  const token = localStorage.getItem("accessToken");
+  let token = localStorage.getItem("accessToken");
 
   if (!token) return null;
 
-  const res = await fetch(`${API_URL}/auth/me`, {
-    method: "GET",
-    headers: {
-      Authorization: `Bearer ${token}`,
-    },
-  });
+  let res = await fetchCurrentUser(token);
+
+  if (res.status === 401) {
+    token = await refreshSession();
+    res = await fetchCurrentUser(token);
+  }
 
   if (!res.ok) {
     const err = await res.json().catch(() => null);
-    localStorage.removeItem("accessToken");
-    localStorage.removeItem("refreshToken");
+    logout();
     throw new Error(err?.message || "Failed to fetch user");
   }
 
-  const data: CurrentUser = await res.json();
-
-  return data;
+  return res.json() as Promise<CurrentUser>;
 }
