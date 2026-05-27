@@ -30,6 +30,8 @@ function UserMenu({ currentUser }: UserMenuProps) {
     <div ref={ref} className="relative">
       <button
         onClick={handleToggleUserMenu}
+        aria-expanded={userMenuOpen}
+        aria-haspopup="menu"
         className="cursor-pointer flex items-center gap-2 rounded-full pl-0.5 pr-3 py-0.5 hover:bg-white/10 transition-all duration-200 max-w-40 sm:max-w-50"
       >
         <img
@@ -60,10 +62,11 @@ function UserMenu({ currentUser }: UserMenuProps) {
             </div>
           </div>
 
-          <ul className="py-1">
-            <li>
+          <ul role="menu" className="py-1">
+            <li role="none">
               <Link
                 to="/user"
+                role="menuitem"
                 onClick={handleCloseUserMenu}
                 className="flex items-center gap-2.5 px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
               >
@@ -71,9 +74,10 @@ function UserMenu({ currentUser }: UserMenuProps) {
                 Profile
               </Link>
             </li>
-            <li>
+            <li role="none">
               <button
                 onClick={logout}
+                role="menuitem"
                 className="cursor-pointer flex items-center gap-2.5 w-full px-4 py-2 text-sm text-slate-700 hover:bg-slate-50 transition-colors"
               >
                 <HiArrowRightOnRectangle className="w-4 h-4 text-slate-400 shrink-0" />
