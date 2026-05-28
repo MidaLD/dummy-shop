@@ -11,6 +11,7 @@ export function useLogout() {
   function logout() {
     logoutApi();
     queryClient.setQueryData(["user"], null);
+    queryClient.removeQueries({ predicate: (q) => q.queryKey[0] !== "user" });
     dispatch(setCart([]));
     dispatch(setCartId(null));
     toast.success("Successfully logged out");
