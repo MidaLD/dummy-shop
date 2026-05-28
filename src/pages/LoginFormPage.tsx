@@ -1,4 +1,5 @@
 import { useState } from "react";
+import { Link } from "react-router";
 import { useLogin } from "../features/authentication/useLogin";
 import Spinner from "../ui/Spinner";
 
@@ -25,9 +26,9 @@ function LoginFormPage() {
   return (
     <div className="min-h-screen flex">
       <div className="hidden lg:flex lg:w-1/2 flex-col justify-between bg-slate-800 px-14 py-12 text-white">
-        <div className="text-lg font-semibold tracking-tight">
+        <Link to="/" className="text-lg font-semibold tracking-tight hover:opacity-80 transition-opacity">
           Dummy<span className="text-slate-400">Shop</span>
-        </div>
+        </Link>
 
         <div>
           <p className="text-3xl font-semibold leading-snug text-white">
@@ -46,9 +47,9 @@ function LoginFormPage() {
       </div>
 
       <div className="flex flex-1 flex-col items-center justify-center bg-slate-50 px-6 py-12">
-        <div className="lg:hidden mb-10 text-lg font-semibold tracking-tight text-slate-800">
+        <Link to="/" className="lg:hidden mb-10 text-lg font-semibold tracking-tight text-slate-800 hover:opacity-70 transition-opacity">
           Dummy<span className="text-slate-400">Shop</span>
-        </div>
+        </Link>
 
         <div className="w-full max-w-sm">
           <div className="mb-8">
@@ -136,6 +137,13 @@ function LoginFormPage() {
                 "Sign in"
               )}
             </button>
+
+            <p className="text-center text-sm text-slate-500">
+              Just browsing?{" "}
+              <Link to="/" className="font-medium text-slate-700 underline underline-offset-2 hover:text-slate-900 transition-colors">
+                Continue to shop
+              </Link>
+            </p>
           </form>
         </div>
       </div>

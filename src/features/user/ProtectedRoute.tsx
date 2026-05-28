@@ -1,12 +1,7 @@
-import { Navigate } from "react-router";
+import { Navigate, Outlet } from "react-router";
 import { useCurrentUser } from "../authentication/useCurrentUser";
-import { ReactNode } from "react";
 
-type ProtectedRouteProps = {
-  children: ReactNode;
-};
-
-function ProtectedRoute({ children }: ProtectedRouteProps) {
+function ProtectedRoute() {
   const { currentUser, isLoading } = useCurrentUser();
 
   if (isLoading) return null;
@@ -15,7 +10,7 @@ function ProtectedRoute({ children }: ProtectedRouteProps) {
     return <Navigate to="/login" replace />;
   }
 
-  return children;
+  return <Outlet />;
 }
 
 export default ProtectedRoute;

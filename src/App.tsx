@@ -1,21 +1,18 @@
-import { BrowserRouter, Route, Routes } from "react-router";
-import { lazy, Suspense } from "react";
-import AppLayout from "./ui/AppLayout";
-import CartPage from "./pages/CartPage";
+import { createBrowserRouter, RouterProvider, Outlet } from "react-router";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { ReactQueryDevtools } from "@tanstack/react-query-devtools";
-import ProductDetailsPage from "./pages/ProductDetailsPage";
 import { Toaster } from "react-hot-toast";
+import AppLayout from "./ui/AppLayout";
+import CartPage from "./pages/CartPage";
+import ProductDetailsPage from "./pages/ProductDetailsPage";
+import ShopPage from "./pages/ShopPage";
 import ProtectedRoute from "./features/user/ProtectedRoute";
 import PageNotFound from "./ui/PageNotFound";
-const UserProfilePage = lazy(() => import("./pages/UserProfilePage"));
-const LoginFormPage = lazy(() => import("./pages/LoginFormPage"));
-import ShopPage from "./pages/ShopPage";
 import BreakpointInitializer from "./ui/BreakpointInitializer";
-import SpinnerFullPage from "./ui/SpinnerFullPage";
 import CartProvider from "./features/cart/CartProvider";
+import NavigationProgress from "./ui/NavigationProgress";
 
-const toatsOptions = {
+const toastOptions = {
   style: {
     fontFamily: "'Inter', sans-serif",
     fontSize: "14px",
@@ -66,48 +63,66 @@ const queryClient = new QueryClient({
   },
 });
 
+function RootLayout() {
+  return (
+    <>
+      <NavigationProgress />
+      <Outlet />
+    </>
+  );
+}
+
+const router = createBrowserRouter([
+  {
+    element: <RootLayout />,
+    children: [
+      {
+        path: "/login",
+        lazy: async () => {
+          const { default: Component } = await import("./pages/LoginFormPage");
+          return { Component };
+        },
+      },
+      {
+        element: (
+          <CartProvider>
+            <AppLayout />
+          </CartProvider>
+        ),
+        children: [
+          { path: "/", element: <ShopPage /> },
+          { path: "/product-details/:productId", element: <ProductDetailsPage /> },
+          { path: "/cart", element: <CartPage /> },
+          {
+            element: <ProtectedRoute />,
+            children: [
+              {
+                path: "/user",
+                lazy: async () => {
+                  const { default: Component } = await import("./pages/UserProfilePage");
+                  return { Component };
+                },
+              },
+            ],
+          },
+        ],
+      },
+      { path: "*", element: <PageNotFound /> },
+    ],
+  },
+]);
+
 function App() {
   return (
     <QueryClientProvider client={queryClient}>
       <BreakpointInitializer />
       <ReactQueryDevtools initialIsOpen={false} />
-      <BrowserRouter>
-        <Suspense fallback={<SpinnerFullPage />}>
-          <Routes>
-            <Route path="/login" element={<LoginFormPage />} />
-            <Route
-              element={
-                <CartProvider>
-                  <AppLayout />
-                </CartProvider>
-              }
-            >
-              <Route path="/" element={<ShopPage />} />
-              <Route
-                path="/product-details/:productId"
-                element={<ProductDetailsPage />}
-              />
-              <Route path="/cart" element={<CartPage />} />
-
-              <Route
-                path="/user"
-                element={
-                  <ProtectedRoute>
-                    <UserProfilePage />
-                  </ProtectedRoute>
-                }
-              />
-            </Route>
-            <Route path="*" element={<PageNotFound />} />
-          </Routes>
-        </Suspense>
-      </BrowserRouter>
-
+      <RouterProvider router={router} />
       <Toaster
         position="bottom-right"
         gutter={12}
         containerStyle={{ margin: "8px" }}
-        toastOptions={toatsOptions}
+        toastOptions={toastOptions}
       />
     </QueryClientProvider>
   );
