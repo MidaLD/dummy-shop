@@ -39,7 +39,7 @@ function CategoriesMenu() {
   );
 
   return (
-    <div className="sticky h-screen bottom-0 top-0 z-20">
+    <div className="sticky xl2:static xl2:h-full h-screen bottom-0 top-0 z-20">
       <motion.div
         initial={isLargeDesktop ? false : { x: "-100%" }}
         animate={{ x: 0 }}

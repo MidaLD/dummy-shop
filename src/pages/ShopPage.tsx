@@ -14,17 +14,19 @@ function ShopPage() {
 
   const limit = 12;
 
-  const { data, isLoading, isError, error } = useAllProducts({
+  const { data, isLoading, isFetching, isError, error } = useAllProducts({
     category,
     page,
     limit,
     enabled: !query,
   });
-  const { searchedProducts, isLoadingSearch } = useSearchProducts({
+  const { searchedProducts, isLoadingSearch, isFetchingSearch } = useSearchProducts({
     query,
     page,
     limit,
   });
+
+  const isPaging = (isFetching && !isLoading) || (isFetchingSearch && !isLoadingSearch);
 
   if (isLoading || isLoadingSearch) {
     return (
@@ -55,7 +57,7 @@ function ShopPage() {
 
   return (
     <div className="px-4 py-6 sm:px-6">
-      <div className="grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4">
+      <div className={`grid grid-cols-2 gap-3 sm:grid-cols-3 sm:gap-4 lg:grid-cols-4 transition-opacity duration-200 ${isPaging ? "opacity-50" : "opacity-100"}`}>
         {products.length > 0 ? (
           <>
             {products.map((product) => (

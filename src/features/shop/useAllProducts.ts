@@ -1,8 +1,4 @@
-import {
-  keepPreviousData,
-  useQuery,
-  useQueryClient,
-} from "@tanstack/react-query";
+import { useQuery, useQueryClient, keepPreviousData } from "@tanstack/react-query";
 import {
   getAllProducts,
   GetAllProductsParams,
@@ -21,7 +17,7 @@ export function useAllProducts({
 }: GetAllProductsHookParams) {
   const queryClient = useQueryClient();
 
-  const { data, isLoading, isError, error } = useQuery({
+  const { data, isLoading, isFetching, isError, error } = useQuery({
     queryKey: ["products", category, page, limit],
     queryFn: () => getAllProducts({ category, page, limit }),
     enabled,
@@ -44,5 +40,5 @@ export function useAllProducts({
       });
   }, [page, pageCount, category, limit, queryClient]);
 
-  return { data, isLoading, error, isError };
+  return { data, isLoading, isFetching, error, isError };
 }

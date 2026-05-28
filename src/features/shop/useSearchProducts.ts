@@ -1,4 +1,4 @@
-import { useQuery } from "@tanstack/react-query";
+import { useQuery, keepPreviousData } from "@tanstack/react-query";
 import {
   searchProducts,
   SearchProductsParams,
@@ -12,13 +12,15 @@ export function useSearchProducts({
   const {
     data: searchedProducts,
     isLoading: isLoadingSearch,
+    isFetching: isFetchingSearch,
     isError,
     error,
   } = useQuery({
     queryFn: ({ signal }) => searchProducts({ query, page, limit, signal }),
     queryKey: ["search", query, page, limit],
     enabled: !!query,
+    placeholderData: keepPreviousData,
   });
 
-  return { searchedProducts, isLoadingSearch, isError, error };
+  return { searchedProducts, isLoadingSearch, isFetchingSearch, isError, error };
 }
