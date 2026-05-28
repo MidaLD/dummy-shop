@@ -19,7 +19,7 @@ No test runner is configured.
 
 ### State split: Redux vs React Query
 
-- **Redux Toolkit** (`src/redux/`) owns UI and client state: categories menu open/closed, search query, and cart items. Cart state is persisted to `localStorage` via `redux-persist`.
+- **Redux Toolkit** (`src/redux/`) owns UI and client state: categories menu open/closed, search query, cart items, and current breakpoint. Cart state is persisted to `localStorage` via `redux-persist`.
 - **React Query** owns all server state: product listings, product details, categories, user profile. Query hooks live alongside the features they serve (e.g. `src/features/shop/`).
 
 Use `useAppDispatch` / `useAppSelector` (typed wrappers in `src/features/hooks/`) instead of the raw Redux hooks.
@@ -33,13 +33,13 @@ Use `useAppDispatch` / `useAppSelector` (typed wrappers in `src/features/hooks/`
 | `authentication/` | Login/logout/current-user React Query hooks |
 | `cart/` | Cart components + `useUserCart` hook |
 | `shop/` | Product list, product details, search, categories + query hooks |
-| `user/` | `UserMenu`, `UserProfilePage`, `ProtectedRoute` |
+| `user/` | `UserMenu`, `UserSection`, `LoginButton`, `ProtectedRoute` |
 
 Shared, domain-agnostic components live in `src/ui/`. Page-level route components are in `src/pages/`.
 
 ### Routing
 
-React Router 7 with a nested layout. `AppLayout` (Header + Footer + `<Outlet>`) is the root layout. Protected routes are wrapped by `ProtectedRoute` in `src/features/user/`.
+React Router 7 using `createBrowserRouter` + `RouterProvider` with a nested layout. `AppLayout` (Header + Footer + `<Outlet>`) is the root layout. Protected routes are wrapped by `ProtectedRoute` in `src/features/user/`. Low-traffic routes (`/login`, `/profile`) use `lazy:` async imports for code splitting.
 
 ### API layer
 
@@ -50,7 +50,7 @@ Vite proxies `/api/*` to `https://dummyjson.com` in development (`vite.config.js
 
 ## Styling
 
-Currently migrating to **Tailwind CSS v4** (`@tailwindcss/vite` plugin). Global styles are in `src/index.css`; component-level overrides in `src/App.css`. Prefer Tailwind utility classes for new work on this branch.
+**Tailwind CSS v4** (`@tailwindcss/vite` plugin). Global styles are in `src/index.css`. Use Tailwind utility classes for all styling.
 
 ## TypeScript
 

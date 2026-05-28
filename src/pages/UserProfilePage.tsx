@@ -12,7 +12,6 @@ import {
 import { useCurrentUser } from "../features/authentication/useCurrentUser";
 import Spinner from "../ui/Spinner";
 
-
 function UserProfilePage() {
   const { currentUser, isLoading } = useCurrentUser();
 
@@ -100,7 +99,10 @@ function UserProfilePage() {
       </div>
 
       <div className="grid grid-cols-1 gap-4 sm:grid-cols-2">
-        <ProfileCard icon={<HiUser className="h-4 w-4" />} title="Personal Details">
+        <ProfileCard
+          icon={<HiUser className="h-4 w-4" />}
+          title="Personal Details"
+        >
           <InfoRow label="Age" value={age} />
           <InfoRow
             label="Gender"
@@ -117,7 +119,10 @@ function UserProfilePage() {
         </ProfileCard>
 
         {address && (
-          <ProfileCard icon={<HiMapPin className="h-4 w-4" />} title="Home Address">
+          <ProfileCard
+            icon={<HiMapPin className="h-4 w-4" />}
+            title="Home Address"
+          >
             <InfoRow label="Street" value={address.address} />
             <InfoRow
               label="City"
