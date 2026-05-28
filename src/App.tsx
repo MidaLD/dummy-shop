@@ -91,15 +91,19 @@ const router = createBrowserRouter([
         ),
         children: [
           { path: "/", element: <ShopPage /> },
-          { path: "/product-details/:productId", element: <ProductDetailsPage /> },
+          {
+            path: "/product-details/:productId",
+            element: <ProductDetailsPage />,
+          },
           { path: "/cart", element: <CartPage /> },
           {
             element: <ProtectedRoute />,
             children: [
               {
-                path: "/user",
+                path: "/profile",
                 lazy: async () => {
-                  const { default: Component } = await import("./pages/UserProfilePage");
+                  const { default: Component } =
+                    await import("./pages/UserProfilePage");
                   return { Component };
                 },
               },

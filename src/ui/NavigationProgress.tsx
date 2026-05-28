@@ -17,7 +17,7 @@ function NavigationProgress() {
   return (
     <AnimatePresence>
       {show && (
-        <div className="fixed top-0 left-0 right-0 z-[9999] h-0.5">
+        <div className="fixed top-0 left-0 right-0 z-9999 h-0.5">
           <motion.div
             className="h-full bg-indigo-500"
             initial={{ width: "0%" }}
